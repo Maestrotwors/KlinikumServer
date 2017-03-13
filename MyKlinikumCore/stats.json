@@ -1,0 +1,132 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "2.2.1",
+  "hash": "082b27f46c872fbe7c05",
+  "time": 838,
+  "publicPath": "",
+  "assetsByChunkName": {
+    "main": "./wwwroot/output.js"
+  },
+  "assets": [
+    {
+      "name": "./wwwroot/output.js",
+      "size": 2827,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "emitted": true
+    }
+  ],
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "./wwwroot/output.js"
+      ]
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "extraAsync": false,
+      "size": 0,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "./wwwroot/output.js"
+      ],
+      "hash": "298d0b5794d08d31990b",
+      "parents": [],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\wwwroot\\input.js",
+          "name": "./wwwroot/input.js",
+          "index": 0,
+          "index2": 0,
+          "size": 0,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "profile": {
+            "factory": 32,
+            "building": 773
+          },
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "usedExports": true,
+          "providedExports": null,
+          "depth": 0,
+          "source": ""
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "moduleId": 0,
+          "module": "C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\wwwroot\\input.js",
+          "moduleIdentifier": "C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\wwwroot\\input.js",
+          "moduleName": "./wwwroot/input.js",
+          "loc": "",
+          "name": "main",
+          "reasons": []
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\node_modules\\babel-loader\\lib\\index.js!C:\\Users\\RR\\documents\\visual studio 2017\\Projects\\MyKlinikumCore\\MyKlinikumCore\\wwwroot\\input.js",
+      "name": "./wwwroot/input.js",
+      "index": 0,
+      "index2": 0,
+      "size": 0,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "assets": [],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "profile": {
+        "factory": 32,
+        "building": 773
+      },
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "reasons": [],
+      "usedExports": true,
+      "providedExports": null,
+      "depth": 0,
+      "source": ""
+    }
+  ],
+  "filteredModules": 0,
+  "children": []
+}

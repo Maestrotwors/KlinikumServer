@@ -1,0 +1,23 @@
+﻿body {
+     
+}
+
+.patient_listbox {
+    cursor: pointer;
+}
+
+.patient_listbox:hover {
+    background-color: aquamarine;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .2s
+}
+
+.fade-enter, .fade-leave-active {
+    opacity: 0
+}
+
+[v-cloak] {
+    display: none;
+}

@@ -1,0 +1,174 @@
+﻿<div style="font-weight: normal !important">
+<div style="">
+    <center><b>Table 1</b></center> 
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Variables</th>
+                <th>Value</th>
+                <th>SOFA Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>Respiratory</td>
+                <td>{{Model_Quest[129]*750/Model_Quest[131]}}</td>
+                <td>{{GM().GetSofa(1,Model_Quest[129]*750/Model_Quest[131])}}</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>Coagulation</td>
+                <td>{{Model_Quest[71]}}</td>
+                <td>{{GM().GetSofa(2,Model_Quest[71])}}</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>Liver(Bilirubin)</td>
+                <td>{{Model_Quest[80]}}</td>
+                <td>{{GM().GetSofa(3,Model_Quest[80])}}</td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td>Cardiovascular Hypotension</td>
+                <td>-</td>
+                <td>{{GM().GetSofa(4,0)}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    Summ SOFA: {{parseInt(GM().GetSofa(1,Model_Quest[129]*750/Model_Quest[131]))+parseInt(GM().GetSofa(2,Model_Quest[71]))+parseInt(GM().GetSofa(3,Model_Quest[80])+parseInt(GM().GetSofa(4,0)))}} 
+</div>
+
+<div>
+    <center><b>Table 2</b></center>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody class="berechnung_false">
+            <tr v-bind:class="{'berechnung_true ':Model_Quest[12]}">
+                <th>1</th>
+                <th>Fever oder Hypothermia</th>
+                <th><i v-bind:class="{'fa fa-check':Model_Quest[12]}"></i></th>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[33]>90}">
+                <th>2</th>
+                <th>Heart rate,mehr als 90 pro Min </th>
+                <th ><i v-bind:class="{'fa fa-check':Model_Quest[33]>90}"></i></th>
+            </tr>
+            <tr  v-bind:class="{'berechnung_true':Model_Quest[36]>12}">
+                <th>3</th>
+                <th>Tachypneue</th>
+                <th><i v-bind:class="{'fa fa-check':Model_Quest[36]>12}"></i></th>              
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[165]<9}">
+                <th>4</th>
+                <th>Altered mental status (GCS)</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[165]<9}"></i></td>
+            </tr>
+        </tbody>
+    </table>
+    Summ:{{GM().BtoInt(Model_Quest[12])+ GM().BtoInt(Model_Quest[33]>90)+GM().BtoInt(Model_Quest[36]>12)+GM().BtoInt(Model_Quest[165]<9)}}
+ </div>
+
+<div style="">
+    <center><b>Table 3</b></center>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[70]>12000}">
+                <th>1</th>
+                <th>Leukocytosis > 12000</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[70]>12000}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[70]<4000}">
+                <th>2</th>
+                <th>Leukopenia < 4000 </th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[70]<4000}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[81]>15}">
+                <th>3</th>
+                <th>CRP mehr als 15</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[81]>15}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[82]>1.5}">
+                <th>4</th>
+                <th>Procalcitonin mehr als 1,5 </th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[82]>1.5}"></i></td>
+            </tr>
+        </tbody>
+    </table>
+    Summ:{{GM().BtoInt(Model_Quest[70]>12000)+GM().BtoInt(Model_Quest[70]<4000)+ GM().BtoInt(Model_Quest[81]>15)+ GM().BtoInt(Model_Quest[82]>1.5)}}
+</div>
+
+
+<div style="">
+    <center><b>Table 4</b></center>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[31]<90||Model_Quest[32]<70}">
+                <th>1</th>
+                <th>Arterial Hypotension  (SD<90 oder DD<70 )</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[31]<90||Model_Quest[32]<70}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[129]*750/Model_Quest[131]<300}">
+                <th>2</th>
+                <th>Arterial hypoxemia</th>
+                <td><i  v-bind:class="{'fa fa-check':Model_Quest[129]*750/Model_Quest[131]<300}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[78]>44.2}">
+                <th>3</th>
+                <th>Creatinin increase mehr als 44.2 mkmol/l</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[78]>44.2}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[73]>1.5||Model_Quest[75]>60}">
+                <th>4</th>
+                <th>Coagulation abnormalities</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[73]>1.5||Model_Quest[75]>60}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[71]<10000}">
+                <th>5</th>
+                <th>Thrombocytopenia, weniger als 100 000</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[71]<10000}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[80]>70}">
+                <th>5</th>
+                <th>Hyperbilirubinemia, mehr als 70 mkmol/l (total Bilirubin)</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[80]>70}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[139]>1}">
+                <th>6</th>
+                <th>Hyperlactatemia</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[139]>1}"></i></td>
+            </tr>
+            <tr v-bind:class="{'berechnung_true':Model_Quest[166]}">
+                <th>7</th>
+                <th>Verlängerte Rekapillarisierung</th>
+                <td><i v-bind:class="{'fa fa-check':Model_Quest[166]}"></i></td>
+            </tr>
+        </tbody>
+    </table>
+    Summ: {{GM().BtoInt(Model_Quest[31]<90||Model_Quest[32]<70)+GM().BtoInt(Model_Quest[78]>44.2)+GM().BtoInt(Model_Quest[129]*750/Model_Quest[131]<300)+GM().BtoInt(Model_Quest[78]>44.2+Model_Quest[73]>1.5||Model_Quest[75]>60)+GM().BtoInt(Model_Quest[71]<10000)+GM().BtoInt(Model_Quest[80]>70)+GM().BtoInt(Model_Quest[139]>1)+GM().BtoInt(Model_Quest[166])}}
+</div>
+
+</div>
+

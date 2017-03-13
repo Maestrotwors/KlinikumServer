@@ -1,0 +1,39 @@
+﻿<div style="height:100%">
+    <div class="sk-circle" v-show="WartenInfo" id="WarteInfo"   style="z-index:10;border: 1px solid #000;background: #fc0; ">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div><div style="margin-left:50px;color:brown">Bitte warten</div>
+    </div>
+    <div style="font-size: 170%;"><b>{{SelectedNotfall.Name}} {{SelectedNotfall.Vorname}}</b></div>  Geb: {{SelectedNotfall.GebDate}} Reanimation:{{SelectedNotfall.ReanimationDateTime}} Gender: <i v-show="SelectedNotfall.Gender==1" class="fa fa-ambulance fa-venus"></i><i v-show="SelectedNotfall.Gender==0" class="fa fa-ambulance fa-mars"></i> <div>Notfall: <b>{{ $route.params.NotfallId }}</b></div>
+    <div tyle="height:100%">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active" v-on:click="GM().tab_change(1)"><a href="#NotfallViewDescription1" aria-controls="NotfallViewDescription1" role="tab" data-toggle="tab">Aus Notfallprotokollen</a></li>
+            <li role="presentation" v-on:click="GM().tab_change(2)"><a href="#NotfallViewDescription2" aria-controls="NotfallViewDescription2" role="tab" data-toggle="tab">Aus Orbis</a></li>
+            <li role="presentation" v-on:click="GM().tab_change(3)"><a href="#NotfallViewDescription3" aria-controls="messagesNotfallViewDescription3" role="tab" data-toggle="tab">Aus den Akten</a></li>
+            <li role="presentation" v-on:click="GM().tab_change(4)"><a href="#NotfallViewBerechnung" aria-controls="messagesNotfallViewBerechnung" role="tab" data-toggle="tab">Berechnung</a></li>
+        </ul>
+        <div class="tab-content" tyle="height:100%">
+            <div role="tabpanel" class="tab-pane active" id="NotfallViewDescription1" style="overflow-y:scroll;">
+                @Html.Partial("~/Views/Main/Templates/NotfallViewDescription1.cshtml")
+            </div>
+            <div role="tabpanel" class="tab-pane" id="NotfallViewDescription2">
+                @Html.Partial("~/Views/Main/Templates/NotfallViewDescription2.cshtml")
+            </div>
+            <div role="tabpanel" class="tab-pane" id="NotfallViewDescription3">
+                @Html.Partial("~/Views/Main/Templates/NotfallViewDescription3.cshtml")
+            </div>
+            <div role="tabpanel" class="tab-pane" id="NotfallViewBerechnung">
+                @Html.Partial("~/Views/Main/Templates/NotfallViewBerechnung.cshtml")
+            </div>
+        </div>
+    </div>  
+</div>

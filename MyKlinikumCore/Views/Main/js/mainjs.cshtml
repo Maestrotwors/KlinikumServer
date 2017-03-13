@@ -1,0 +1,150 @@
+﻿<script>
+    window.onload = function () {
+        @Html.Partial("~/Views/Main/js/GlobalData.js")
+        @Html.Partial("~/Views/Main/js/GlobalMethods.js")
+        @Html.Partial("~/Views/Main/js/WebSocket.js")
+
+        GM.GetNotfalls();
+
+        Vue.component('VariantComp', {
+            props: ['Answer', 'Question'],
+            template: `<div><input type="radio"  v-bind:id="'answ_'+Answer.Id" v-bind:value="Answer.Id" v-bind:v-model="GM().getAnswersModel(Answer.QuestionId)">` +
+                      `<label v-bind:for="'answ_'+Answer.Id">{{Answer.Answer}}</label></div>`,
+            data: function () {
+                return GD;
+            },
+            events: {},
+            methods: {
+                GM: function () {
+                    return GM;
+                }
+            },
+            created: function () {
+                GD.AnswersModel[this.Answer.QuestionId] = "";
+            }
+        });
+
+        //GD.AnswersModel[4] = "";
+
+        var IndexPage = {
+            template: `@Html.Partial("~/Views/Main/Templates/About.cshtml")`
+        };
+        var PatientsPage = {
+            template: `@Html.Partial("~/Views/Main/Templates/Patienten.cshtml")`,
+            data: function () {
+                return GD;
+            },
+            events: {},
+            methods: {
+                GM: function () {
+                    return GM;
+                }
+            },
+            created: function () {
+            }
+        };
+        var NotfallePage = {
+            template: `@Html.Partial("~/Views/Main/Templates/Notfalle.cshtml")`,
+            data: function () {
+                return GD;
+            },
+            events: {},
+            methods: {
+                GM: function () {
+                    return GM;
+                },
+                NotfallChanged: function (id) {
+                    GM.NotfallChanged(id);
+                }
+            },
+            created() {
+                //console.log("---");
+                this.NotfallChanged(this.$route.params.NotfallId);
+            },
+            watch: {
+                '$route':function(to, from) {
+                    if (from.query.tab = !to.query.tab) { }
+                }
+            }
+        };
+        var NotfallPage = {
+            template: `@Html.Partial("~/Views/Main/Templates/NotfallView.cshtml")`,
+            data: function () {
+                return GD;
+            },
+            events: {},
+            methods: {
+                GM: function () {
+                    return GM;
+                }
+            },
+            created: function () {
+
+            }
+        };
+        var NotfallNewPage = {
+            template: `@Html.Partial("~/Views/Main/Templates/NotfallNew.cshtml")`,
+            data: function () {
+                return GD;
+            },
+            events: {},
+            methods: {
+                GM: function () {
+                    return GM;
+                }
+            },
+            created: function () {
+            }
+        };
+
+        var routes = [
+            { path: '/', component: IndexPage, name: "IndexPage" },
+            { path: '/patients', component: PatientsPage, name: "PatientsPage" },
+            {
+                path: '/notfalls', component: NotfallePage, name: "NotfallePage",
+                children: [
+                    {
+                        path: ':NotfallId',
+                        component: NotfallPage,
+                        name: 'NotfallPage',
+                        onEnter: function () {
+                            //console.log("--======-");
+                            //console.log($router.params.userId);
+                        },
+                        created: function () {
+                            //console.log("---");
+                        }
+                    }
+                ]
+            },
+            { path: '/notfall/new', component: NotfallNewPage, name: "NotfallNewPage"}
+        ];
+        var router = new VueRouter({ mode: 'history', routes });
+
+        var app = new Vue({
+            router,
+            el: '#app',
+            data: function () {
+                return GD;
+            },
+            events: {},
+            methods: {
+                GM: function () {
+                    return GlobalMethods;
+                },
+                ServerConnect: function () {
+                    //GlobalData.connection = ReconnectToServer(GlobalData);
+                }
+            },
+            created: function () {
+
+            },
+            /*watch: {
+                '$route'(to, from) {
+                    //console.log('Router from-' + to.path + '  to- ' + from.path);
+                    //console.log($rout.params);
+                }
+            }*/
+        });
+    }
+</script>

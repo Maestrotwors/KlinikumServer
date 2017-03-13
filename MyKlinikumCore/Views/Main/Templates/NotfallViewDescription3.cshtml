@@ -1,0 +1,93 @@
+﻿<div style="background-color:wheat">
+    <div>
+        @{
+            int Questindex = 1;
+            string TableHeader = "";
+            string TableFooter = "";
+            foreach (var Question in (ViewData["Questions"] as List<List<string>>))
+            {
+                if (Question[2] == "3")
+                {
+                    <div class="NotfallDescrElement">
+                        <div class="NotfallParametrName"><strong>@Questindex) </strong>@Question[1]</div>
+                        <div>
+                            @if (Question[3] == "3")
+                            { TableHeader = "<table><tr><th style='width:200px;'></th><th></th><th></th></tr>"; TableFooter = "</table>"; }
+                            @Html.Raw(TableHeader)
+                            @foreach (var Answer in (ViewData["Answers"] as List<List<string>>))
+                            {
+
+                                string type = null;
+                                switch (Answer[3])
+                                {
+                                    case "1":
+                                        type = "type=radio  v-bind:onChange=\"SaveParam(" + Answer[0] + "," + @Question[0] + ",this.value)\" :name=\"Quest_" + @Question[0] + "\" :value=" + Answer[0];
+                                        break;
+                                    case "2":
+                                        type = "type=checkbox v-bind:onChange=\"SaveParam(" + Answer[0] + "," + @Question[0] + ",this.checked)\" :name=\"Quest_" + @Question[0] + "\"";
+                                        break;
+                                    case "7":
+                                        type = "type=number min=0 v-bind:onChange=\"SaveParam(" + Answer[0] + "," + @Question[0] + ",this.value)\" :name=\"Quest_" + @Question[0] + "\"";
+                                        break;
+                                    case "3":
+                                        type = "type=text v-bind:onChange=\"SaveParam(" + Answer[0] + "," + @Question[0] + ",this.value)\" :name=\"Quest_" + @Question[0] + "\"";
+                                        break;
+                                    case "5":
+                                        type = "type=date v-bind:onChange=\"SaveParam(" + Answer[0] + "," + @Question[0] + ",this.value)\" :name=\"Quest_" + @Question[0] + "\"";
+                                        break;
+                                    case "6":
+                                        type = "type=time v-bind:onChange=\"SaveParam(" + Answer[0] + "," + @Question[0] + ",this.value)\" :name=\"Quest_" + @Question[0] + "\"";
+                                        break;
+                                    case "8":
+                                        type = "Formula";
+                                        break;
+                                        //case "4":
+                                        //type = "<textarea v-bind:onChange=\"SaveParam(" + Answer[0] + "," + @Question[0] + ",this.value)\" :name=\"Quest_" + @Question[0] + "></textarea>";
+                                        //break;
+                                }
+                                if (Answer[1] == Question[0])
+                                {
+                                    if (Question[3] == "1")
+                                    {
+                                        <tr>
+                                            <td><label style="cursor:pointer" for="Quest_@Question[0]_Answ_@Answer[0]">@Answer[2]</label></td>
+                                            <td>
+                                                @switch (Answer[3])
+                                                {
+                                                    case "8":
+                                                         
+                                                        break;
+                                                    case "9":
+                                                        <select >
+                                                            <option>Пункт 1</option>
+                                                            <option>Пункт 2</option>
+                                                        </select>
+                                                        break;
+                                                    default:
+                                                        <input id="Quest_@Question[0]_Answ_@Answer[0]" @type v-model="Model_Quest['@Answer[0]']" style="cursor:pointer">
+                                                        break;
+
+                                                }
+
+                                            </td>
+                                            <td>@Answer[4]</td>
+                                        </tr>
+
+                                    }
+                                    else
+                                    {
+                                        <input id="Quest_@Question[0]_Answ_@Answer[0]" @type v-model="Model_Quest['@Answer[0]']" style="cursor:pointer">
+                                        <label for="Quest_@Question[0]_Answ_@Answer[0]">@Answer[2]</label>
+                                    }
+                                }
+                            }
+                            @Html.Raw(@TableFooter)
+                            @{TableHeader = ""; TableFooter = "";}
+                        </div>
+                    </div>
+                                        Questindex = Questindex + 1;
+                                    }
+                                }
+        }
+    </div>
+</div>

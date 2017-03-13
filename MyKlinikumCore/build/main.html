@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel. Klinikum</title>
+    <script src="https://unpkg.com/vue/dist/vue.js" defer></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js" defer></script>
+
+    <script src="~/min/main.min.js" defer></script>
+</head>
+<body style="width:100%;height:100%">
+    <div id="app">
+        <p>
+            <router-link to="/">main</router-link>
+            <router-link to="/notfalls">notfalls</router-link>
+            <router-link to="/patients">patients</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        [snp tpl= "./files/templates/main/scripts.js"]
+    </script>
+</body>
+</html>
+
+
+
+
+

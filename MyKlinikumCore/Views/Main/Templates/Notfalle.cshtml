@@ -1,0 +1,23 @@
+﻿<div style="height:100%;" > 
+    <table style=" width:100%; height:calc(100% - 5px)">
+        <tr style="height:calc(100% - 5px);width:100%;vertical-align:top">
+            <td style="width:300px !important">
+                <input v-model="Notfall_search" type="text" placeholder="Patient suchen mache ich später">
+                <router-link to="/notfall/new"><i class="fa fa-ambulance fa-plus-square" style="color:red" aria-hidden="true"></i> New Notfall</router-link>
+                <div style="height:calc(100% - 30px);border:2px double;border-radius:5px;margin:2px;">
+                    <div v-for="notfall in NotfallsList" >
+                        <div v-bind:class="{ PatientInNotfallsListSel: $route.params.NotfallId==notfall.Id }" class ="PatientInNotfallsList" v-on:click="GM().NotfallSelect(notfall.Id)" style="font-size: 11pt;"><strong>{{notfall.PatName}} {{notfall.PatVorname}}</strong><div style="text-align: right;color:red;margin-top:-10px;font-size: 9pt;">{{notfall.ReanimationDateTime}} <div style="text-align: right;font-size: 8pt;"><i style="color:blue">geb.{{notfall.GebDate}}</i></div></div></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div   v-if="!$route.params.NotfallId" style="background: url(http://medrabotnik.de/wp-content/uploads/2015/08/cropped-dreamstime_xl_49010041.jpg);width:100%;height:100%"><center class="animated flash"><b>Wählen Sie bitte Notfall.</b></center></div>
+                <div style="height:100%; border:2px ridge;"v-if="$route.params.NotfallId">
+                    <transition name="fade" mode="out-in">
+                        <router-view></router-view>
+                    </transition>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
