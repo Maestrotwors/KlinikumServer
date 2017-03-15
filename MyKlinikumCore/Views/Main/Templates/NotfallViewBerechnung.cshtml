@@ -151,23 +151,23 @@
                 <td><i v-bind:class="{'fa fa-check':Model_Quest[71]<10000}"></i></td>
             </tr>
             <tr v-bind:class="{'berechnung_true':Model_Quest[80]>70}">
-                <th>5</th>
+                <th>6</th>
                 <th>Hyperbilirubinemia, mehr als 70 mkmol/l (total Bilirubin)</th>
                 <td><i v-bind:class="{'fa fa-check':Model_Quest[80]>70}"></i></td>
             </tr>
             <tr v-bind:class="{'berechnung_true':Model_Quest[139]>1}">
-                <th>6</th>
+                <th>7</th>
                 <th>Hyperlactatemia</th>
                 <td><i v-bind:class="{'fa fa-check':Model_Quest[139]>1}"></i></td>
             </tr>
             <tr v-bind:class="{'berechnung_true':Model_Quest[166]}">
-                <th>7</th>
+                <th>8</th>
                 <th>Verlängerte Rekapillarisierung</th>
                 <td><i v-bind:class="{'fa fa-check':Model_Quest[166]}"></i></td>
             </tr>
         </tbody>
     </table>
-    Summ: {{GM().BtoInt(Model_Quest[31]<90||Model_Quest[32]<70)+GM().BtoInt(Model_Quest[78]>44.2)+GM().BtoInt(Model_Quest[129]*750/Model_Quest[131]<300)+GM().BtoInt(Model_Quest[78]>44.2+Model_Quest[73]>1.5||Model_Quest[75]>60)+GM().BtoInt(Model_Quest[71]<10000)+GM().BtoInt(Model_Quest[80]>70)+GM().BtoInt(Model_Quest[139]>1)+GM().BtoInt(Model_Quest[166])}}
+    Summ: {{GM().BtoInt(Model_Quest[31]<90||Model_Quest[32]<70)+GM().BtoInt(Model_Quest[129]*750/Model_Quest[131]<300)+GM().BtoInt(Model_Quest[78]>44.2)+GM().BtoInt(Model_Quest[73]>1.5||Model_Quest[75]>60)+GM().BtoInt(Model_Quest[71]<10000)+GM().BtoInt(Model_Quest[80]>70)+GM().BtoInt(Model_Quest[139]>1)+GM().BtoInt(Model_Quest[166])}}
 </div>
 
 </div>

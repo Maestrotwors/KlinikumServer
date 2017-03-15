@@ -10,7 +10,7 @@ namespace MyKlinikumCore
 {
     public partial class DB 
     {
-        public SqlConnection myConnection = new SqlConnection("Server=Sergii-PC\\SqlExpress;Database=Klinikum;Trusted_Connection=True;");
+        public SqlConnection myConnection = new SqlConnection("Server=91.247.83.221\\SqlExpress;Database=Klinikum;User id=RomanAdmin;Password=Master;");
 
         public bool ExecuteQuery(string Query)
         {
