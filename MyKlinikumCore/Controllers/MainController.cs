@@ -36,6 +36,7 @@ namespace MyKlinikumCore
                     ViewDataFormat DataToView = new ViewDataFormat();
                     ViewData["Questions"] = db.SelectQuerySimple("select Questions.Id,Questions.Question,questionsfolder.FolderId,ShowTable,AnswersCount FROM questionsfolder  INNER JOIN Questions ON Questions.Id= questionsfolder.QuestionId ORDER BY Questions.Id");
                     ViewData["Answers"] = db.SelectQuerySimple("select Answers.Id,QuestionId,Answer,Type,Description,Min,Max,Einheit from Answers LEFT JOIN normwerte ON normwerte.AnswerId=Answers.Id order by Id ");
+                    ViewData["Statistik_Tabs"] = db.SelectQuerySimple("Select * from Statistik_Tabs");
                     return View("Main",ViewBag);
                 }
                 else { return AuthError(); }

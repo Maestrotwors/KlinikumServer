@@ -16,22 +16,22 @@
     <div style="font-size: 170%;"><b>{{SelectedNotfall.Name}} {{SelectedNotfall.Vorname}}</b></div>  Geb: {{SelectedNotfall.GebDate}} Reanimation:{{SelectedNotfall.ReanimationDateTime}} Gender: <i v-show="SelectedNotfall.Gender==1" class="fa fa-ambulance fa-venus"></i><i v-show="SelectedNotfall.Gender==0" class="fa fa-ambulance fa-mars"></i> <div>Notfall: <b>{{ $route.params.NotfallId }}</b></div>
     <div tyle="height:100%">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active" v-on:click="GM().tab_change(1)"><a href="#NotfallViewDescription1" aria-controls="NotfallViewDescription1" role="tab" data-toggle="tab">Aus Notfallprotokollen</a></li>
-            <li role="presentation" v-on:click="GM().tab_change(2)"><a href="#NotfallViewDescription2" aria-controls="NotfallViewDescription2" role="tab" data-toggle="tab">Aus Orbis</a></li>
-            <li role="presentation" v-on:click="GM().tab_change(3)"><a href="#NotfallViewDescription3" aria-controls="messagesNotfallViewDescription3" role="tab" data-toggle="tab">Aus den Akten</a></li>
-            <li role="presentation" v-on:click="GM().tab_change(4)"><a href="#NotfallViewBerechnung" aria-controls="messagesNotfallViewBerechnung" role="tab" data-toggle="tab">Berechnung</a></li>
+            <li role="presentation" id="Notfall_Tab_Panel_1" v-bind:class="{active:this.$route.query.tab==1}" v-on:click="GM().tab_change(1)"><a href="#NotfallViewDescription1" aria-controls="NotfallViewDescription1" role="tab" data-toggle="tab">Aus Notfallprotokollen</a></li>
+            <li role="presentation" id="Notfall_Tab_Panel_2" v-bind:class="{active:this.$route.query.tab==2}" v-on:click="GM().tab_change(2)"><a href="#NotfallViewDescription2" aria-controls="NotfallViewDescription2" role="tab" data-toggle="tab">Aus Orbis</a></li>
+            <li role="presentation" id="Notfall_Tab_Panel_3" v-bind:class="{active:this.$route.query.tab==3}" v-on:click="GM().tab_change(3)"><a href="#NotfallViewDescription3" aria-controls="messagesNotfallViewDescription3" role="tab" data-toggle="tab">Aus den Akten</a></li>
+            <li role="presentation" id="Notfall_Tab_Panel_4" v-bind:class="{active:this.$route.query.tab==4}" v-on:click="GM().tab_change(4)"><a href="#NotfallViewBerechnung" aria-controls="messagesNotfallViewBerechnung" role="tab" data-toggle="tab">Berechnung</a></li>
         </ul>
         <div class="tab-content" tyle="height:100%">
-            <div role="tabpanel" class="tab-pane active" id="NotfallViewDescription1" style="overflow-y:scroll;">
+            <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==1}" id="NotfallViewDescription1" style="overflow-y:scroll;">
                 @Html.Partial("~/Views/Main/Templates/NotfallViewDescription1.cshtml")
             </div>
-            <div role="tabpanel" class="tab-pane" id="NotfallViewDescription2">
+            <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==2}" id="NotfallViewDescription2">
                 @Html.Partial("~/Views/Main/Templates/NotfallViewDescription2.cshtml")
             </div>
-            <div role="tabpanel" class="tab-pane" id="NotfallViewDescription3">
+            <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==3}" id="NotfallViewDescription3">
                 @Html.Partial("~/Views/Main/Templates/NotfallViewDescription3.cshtml")
             </div>
-            <div role="tabpanel" class="tab-pane" id="NotfallViewBerechnung">
+            <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==4}" id="NotfallViewBerechnung">
                 @Html.Partial("~/Views/Main/Templates/NotfallViewBerechnung.cshtml")
             </div>
         </div>

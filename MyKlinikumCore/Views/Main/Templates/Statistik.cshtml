@@ -1,0 +1,46 @@
+﻿<div style="height:100%"> 
+    <div class="sk-circle" v-show="WartenInfo" id="WarteInfo" style="z-index:10;border: 1px solid #000;background: #fc0; ">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div><div style="margin-left:50px;color:brown">Bitte warten</div>
+    </div>
+
+    <div tyle="height:100%">
+        <ul class="nav nav-tabs" role="tablist">
+            @foreach (var tab in ViewData["Statistik_Tabs"] as List<List<string>>)
+            {
+                <li role="presentation" class="my_tab" v-bind:class="{active:this.$route.query.tab==@tab[0]}" id="Statistik_Tab_Panel_@tab[0]" v-on:click="GM().Statistik_Tab_change(@tab[0])"><a href="#Statistik_Tab_@tab[0]" aria-controls="Statistik_Tab_@tab[0]" role="tab" data-toggle="tab">@tab[1]</a></li>
+            }
+        </ul>
+        <div class="tab-content" tyle="height:100%">
+            @foreach (var tab in ViewData["Statistik_Tabs"] as List<List<string>>)
+            {
+                <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==@tab[0]}" id="Statistik_Tab_@tab[0]" style="overflow-y:scroll; height:100%">
+                    @tab[1]
+                </div>
+            }
+
+        </div>
+    </div> 
+
+   <table style="background-color:red; width:100%; height:calc(100% - 5px)">
+       <tr style="height:calc(100% - 5px);vertical-align:top">
+          <td style="background-color:green; width:300px">
+
+          </td>
+          <td>
+
+          </td>
+       </tr>
+   </table>
+
+</div>

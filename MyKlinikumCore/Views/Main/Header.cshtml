@@ -9,9 +9,15 @@
                     <li class="nav-item">
                         <router-link to="/notfalls" class="nav-link"><i class="fa fa-ambulance fa-lg" style="color:red"  aria-hidden="true"></i>Notfalls</router-link>
                     </li>
-                    <li class="nav-item"  >
-                        <router-link style="height:100%" to="/patients" class="nav-link"><i class="fa fa-user fa-lg" style="color:cornflowerblue" aria-hidden="true"></i>Patients</router-link>
+                    <li class="nav-item">
+                        <router-link style="height:100%" to="/statistik?tab=1" class="nav-link"><i class="fa fa-table fa-lg" style="color:cornflowerblue" aria-hidden="true"></i>Statistik</router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link style="height:100%" to="/settings" class="nav-link"><i class="fa fa-gears fa-lg" style="color:cornflowerblue" aria-hidden="true"></i>Settings</router-link>
+                    </li>
+                    <!--<li class="nav-item"  >
+                        <router-link style="height:100%" to="/patients" class="nav-link"><i class="fa fa-user fa-lg" style="color:cornflowerblue" aria-hidden="true"></i>Patients</router-link>
+                    </li>-->
                 </ul>
                 <a href="/logout" style="float: right;text-align: right;" v-once>{{UserName}} Exit</a>
             </div>

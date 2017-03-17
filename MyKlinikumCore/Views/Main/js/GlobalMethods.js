@@ -8,12 +8,18 @@
     NewNotfall: function () {
         //router.go('/notfall/new');
     },
-    NotfallChanged: function (NotfId) {
-        this.NotfallSelect(NotfId);
+    NotfallChanged: function (rout) {
+        this.NotfallSelect(rout.query.id, rout);
         //NotfallChanged(this.$route.params.NotfallId);
     },
-    tab_change: function (TabId) {
-        router.push({ query: { tab: TabId } })
+    Notfall_tab_change: function (tab, rout) {
+        var id_ = 0;
+        //console.log(rout);
+        try { id_ = rout.query.id } catch (e) { }
+        router.push({ query: { id: id_, tab: tab } }); 
+    },
+    Statistik_Tab_change: function (TabId) {
+        router.push({ query: { tab: TabId} })
     },
     SaveParam: function (AnswerId, AnswerQuestion, ThisValue) {
         //console.log(AnswerId + "---" + AnswerQuestion + "----" + ThisValue);
@@ -29,15 +35,13 @@
             }
         });
     },
-    NotfallSelect: function (NotfallId) {
+    NotfallSelect: function (NotfallId, rout) { 
+        if (NotfallId == undefined) { return }
+        var tab = 1;
+        try { tab = rout.query.tab; } finally{if (tab == undefined) { tab = 1; } } 
         GD.Model_Quest = {};
         GD.SelectedNotfallId = NotfallId;
         GD.WartenInfo = true;
-        var tabValue = 1;
-        try { tabValue = router.query.tab }
-        catch (expr) {
-            tabValue = 1;
-        };
         $.ajax({
             url: '/api/get_notfall_data',
             headers: {
@@ -45,7 +49,8 @@
             },
             type: 'POST', data: { "NotfallId": NotfallId },
             success: function (data) {
-                router.push({ name: 'NotfallPage', params: { "NotfallId": NotfallId }, query: { tab: tabValue } });
+                //console.log(NotfallId + "---" + tab);
+                router.push({query: { id: NotfallId, tab: tab} });
                 GD.SelectedNotfall = JSON.parse(data)[0];
             }
         });
@@ -59,13 +64,16 @@
                 arr = JSON.parse(data);
                 GD.Model_Quest = {};
                 arr.forEach(function (item, i, arr) {
-                    console.log(item.AnswerId);
+                    //console.log(item.AnswerId);
                     GD.Model_Quest[item.AnswerId] = item.Value;
                 });
                 GD.WartenInfo = false;
             }
         });
 
+    },
+    GetUndefinedBool: function (rout, query_param, param2) {
+        try { if (rout.query[query_param] == param2) { return true; } } catch(e) { return false };
     },
     GoToNotfalls: function () {
         router.push({ name: 'NotfallePage', params: {} })

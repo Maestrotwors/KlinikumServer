@@ -51,8 +51,9 @@ namespace MyKlinikumCore
                 routes.MapRoute("PatientNew", "patient/new", new { controller = "Main", action = "Index" });
                 routes.MapRoute("Notfalls", "notfalls", new { controller = "Main", action = "Index" });
                 routes.MapRoute("Notfall", "notfalls/{NotfallId}", new { controller = "Main", action = "Index" });
+                routes.MapRoute("Statistik", "statistik", new { controller = "Main", action = "Index" });
                 routes.MapRoute("NotfallNew", "notfall/new", new { controller = "Main", action = "Index" });
-
+                routes.MapRoute("Settings", "settings", new { controller = "Main", action = "Index" });
             });
         }
     }
