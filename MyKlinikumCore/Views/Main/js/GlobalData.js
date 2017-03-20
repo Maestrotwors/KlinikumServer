@@ -25,6 +25,18 @@ var GD = {
     SelectedNotfallId :0,
     WartenInfo: false,
     UserName: getCookie("Login"),
+    Statistik: {
+        Tables: null,
+        Columns: null
+    },
+    Notfalls: {
+        Deleted: {
+            Id: null,
+            Name: null,
+            PatientId: null
+        }
+    }
+
 };
 
  

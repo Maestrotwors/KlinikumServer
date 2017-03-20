@@ -57,6 +57,36 @@ namespace MyKlinikumCore
             return Content(JsonConvert.SerializeObject(db.SelectCommandParam(command)));
         }
 
+        public class Statistik_ReturnData_Class
+        {
+            public List<Dictionary<string, string>> Tables;
+            public List<Dictionary<string, string>> Columns;
+            public List<Dictionary<string, string>> Notfalls;
+            public List<Dictionary<string, string>> Param_Values;
+        }
+        public ActionResult get_statistik_data()
+        {
+            DB db = new DB();
+            SqlCommand command_Tables = new SqlCommand("SELECT st.Id AS TableId,st.Data, st.Name,stit.TabId AS TabId FROM Statistik_Tables st INNER JOIN Statistik_Tables_In_Tabs stit ON st.Id = stit.TableId", db.myConnection);
+            List<Dictionary<string, string>> Tables = db.SelectCommandParam(command_Tables);
+
+            SqlCommand command_Columns = new SqlCommand("SELECT stc.Id,stc.Table_Id,stc.Column_Name, stc.Formule  FROM Statistik_Table_Columns stc", db.myConnection);
+            List<Dictionary<string, string>> Columns = db.SelectCommandParam(command_Columns);
+
+            SqlCommand command_Notfalls = new SqlCommand("SELECT n.Id, n.PatientId,n.ReanimationDateTime,p.Name,p.Vorname,p.GebDate,p.Gender  FROM Notfalls n INNER JOIN Patients p ON p.id=n.PatientId", db.myConnection);
+            List<Dictionary<string, string>> Notfalls = db.SelectCommandParam(command_Notfalls);
+
+            SqlCommand command_Param_Values = new SqlCommand("SELECT AnswerId, Value from NotfallParamValue", db.myConnection);
+            List<Dictionary<string, string>> Param_Values = db.SelectCommandParam(command_Param_Values);
+
+            Statistik_ReturnData_Class ReturnData =new Statistik_ReturnData_Class();
+            ReturnData.Tables = Tables;
+            ReturnData.Columns = Columns;
+            ReturnData.Notfalls = Notfalls;
+            ReturnData.Param_Values = Param_Values;
+            return Content(JsonConvert.SerializeObject(ReturnData));
+        }
+
         [HttpPost]
         public ActionResult save_param_value()
         {
@@ -78,13 +108,31 @@ namespace MyKlinikumCore
             return Content("Error");
         }
 
+        [HttpPost]
+        public ActionResult delete_notfall()
+        {
+            if (Request.Cookies["Session"] != null)
+            {
+                string UserId = Params.Sess[Request.Cookies["Session"]];
+                if (UserId != null)
+                {
+                    DB db = new DB();
+                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    dic.Add("PatientId", Request.Form["PatientId"]);
+                    db.ExecuteProcedure("NotfallDelete", dic);
+                    return Content("1");
+                }
+            }
+            return Content("Error");
+            
+        }
 
         [HttpGet]
         public ActionResult Notfalls()
         {
             DB db = new DB();
             return Content(JsonConvert.SerializeObject(db.SelectQuery(
-              "select Notfalls.Id,Patients.Name AS PatName,Patients.Vorname as PatVorname,Patients.GebDate,Patients.Gender,Notfalls.ReanimationDateTime from notfalls INNER JOIN Patients ON PatientId = Patients.Id")));
+              "select Notfalls.Id,Patients.Name AS PatName,Patients.Vorname as PatVorname,Patients.GebDate,Patients.Gender,Notfalls.ReanimationDateTime,PatientId from notfalls INNER JOIN Patients ON PatientId = Patients.Id")));
         }
 
         /*[HttpGet]

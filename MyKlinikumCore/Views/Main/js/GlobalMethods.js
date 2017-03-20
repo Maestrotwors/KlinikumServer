@@ -19,7 +19,23 @@
         router.push({ query: { id: id_, tab: tab } }); 
     },
     Statistik_Tab_change: function (TabId) {
-        router.push({ query: { tab: TabId} })
+        router.push({ query: { tab: TabId } });
+    },
+    Get_Statistik_Tables: function (TabId) {
+        return _.where(GD.Statistik.Tables, { TabId: TabId.toString() });
+    },
+    Get_Statistik_Columns: function (Table_Id) {
+        //console.log(_.where(GD.Statistik.Columns, { Table_Id: Table_Id.toString() }));
+        return _.where(GD.Statistik.Columns, { Table_Id: Table_Id.toString() });
+    },
+    Get_StatistikTable_Rows: function (Data) {
+        //if (Data == "Notfalls") {  
+            return GD.Statistik.Notfalls;
+        //} 
+    },
+    Get_ColumnFormule: function (RowId,Column) {
+        //console.log(RowId + "---" + Column);
+        return Column.Formule;
     },
     SaveParam: function (AnswerId, AnswerQuestion, ThisValue) {
         //console.log(AnswerId + "---" + AnswerQuestion + "----" + ThisValue);
@@ -35,10 +51,30 @@
             }
         });
     },
+    Get_Statistik_Data: function () {
+        GD.WartenInfo = true;
+        $.ajax({
+            url: '/api/get_statistik_data',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            type: 'POST', data: { },
+            success: function (data) {
+
+                //console.log(NotfallId + "---" + tab);
+                //router.push({ query: { id: NotfallId, tab: tab } });
+                GD.Statistik.Tables = JSON.parse(data)["Tables"];
+                GD.Statistik.Columns = JSON.parse(data)["Columns"];
+                GD.Statistik.Notfalls = JSON.parse(data)["Notfalls"];
+                //console.log(GD.Statistik.Tables);
+                GD.WartenInfo = false;
+            }
+        });
+    },
     NotfallSelect: function (NotfallId, rout) { 
-        if (NotfallId == undefined) { return }
+        if (NotfallId === undefined) { return }
         var tab = 1;
-        try { tab = rout.query.tab; } finally{if (tab == undefined) { tab = 1; } } 
+        try { tab = rout.query.tab; } finally{if (tab === undefined) { tab = 1; } } 
         GD.Model_Quest = {};
         GD.SelectedNotfallId = NotfallId;
         GD.WartenInfo = true;
@@ -73,7 +109,40 @@
 
     },
     GetUndefinedBool: function (rout, query_param, param2) {
-        try { if (rout.query[query_param] == param2) { return true; } } catch(e) { return false };
+        try { if (rout.query[query_param] === param2) { return true; } } catch(e) { return false };
+    },
+    Notfall_Delete: function (NotfallId, PatientId, Notfall_Patient_Name) {
+        GD.Notfalls.Deleted.Id = NotfallId;
+        console.log(PatientId);
+        GD.Notfalls.Deleted.PatientId = PatientId;
+        GD.Notfalls.Deleted.Name = Notfall_Patient_Name;
+        $('#Modal_Notfall_Delete').modal();
+    },
+    Notfall_Delete_Bestatigung: function () {
+        $.ajax({
+            url: '/api/delete_notfall',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            type: 'POST', data: { "PatientId": GD.Notfalls.Deleted.PatientId },
+            success: function (data) {
+                if (data == "1") {
+                    $.ajax({
+                        url: '/api/notfalls',
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        success: function (data) {
+                            GD.NotfallsList = JSON.parse(data);
+                        }
+                    });
+                }
+                //console.log(data);
+                //$('#Modal_Notfall_Delete').modal('hide');
+            }
+        });
+        $('#Modal_Notfall_Delete').modal('hide');
+        
     },
     GoToNotfalls: function () {
         router.push({ name: 'NotfallePage', params: {} })
@@ -86,7 +155,7 @@
             },
             type: 'POST', data: { "PatName": GD.NewNotfall_PatientName, "PatVorname": GD.NewNotfall_PatientVorname, "PatGebDate": GD.NewNotfall_PatientGeburtsdatum, "ReanimationDateTime": "11.11.2011" },
             success: function (data) {
-                if (data == "0") { alert("Fehler"); return }
+                if (data === "0") { alert("Fehler"); return }
                 router.push({ name: 'NotfallPage', params: { "NotfallId": data } });
                 GM.GetNotfalls();
             }
@@ -106,33 +175,33 @@
     GetSofa: function (Param, Value) {
         switch (Param) {
             case 1:
-                if (Value > 400) { return 0 }
-                else if (Value <= 400 && Value > 300) { return 1 }
-                else if (Value <= 300 && Value > 200) { return 2 }
-                else if (Value <= 200 && Value > 100) { return 3 }
-                else if (Value <= 100) { return 4 }
-                else { return "Nicht berechnet" }
+                if (Value > 400) { return 0; }
+                else if (Value <= 400 && Value > 300) { return 1; }
+                else if (Value <= 300 && Value > 200) { return 2; }
+                else if (Value <= 200 && Value > 100) { return 3; }
+                else if (Value <= 100) { return 4; }
+                else { return "Nicht berechnet"; }
 
             case 2:
                 if (Value > 150) { return 0 }
-                else if (Value <= 150 && Value > 100) { return 1 }
-                else if (Value <= 100 && Value > 50) { return 2 }
-                else if (Value <= 50 && Value > 20) { return 3 }
-                else if (Value <= 20) { return 4 }
+                else if (Value <= 150 && Value > 100) { return 1; }
+                else if (Value <= 100 && Value > 50) { return 2; }
+                else if (Value <= 50 && Value > 20) { return 3; }
+                else if (Value <= 20) { return 4; }
                 else { return "Nicht berechnet" }
 
             case 3:
                 if (Value < 1.2) { return 0 }
-                else if (Value > 2 && Value <= 1.2) { return 1 }
-                else if (Value > 2 && Value <= 6.0) { return 2 }
-                else if (Value > 6.0 && Value <= 12) { return 3 }
-                else if (Value > 12) { return 4 }
-                else { return "Nicht berechnet" }
+                else if (Value > 2 && Value <= 1.2) { return 1; }
+                else if (Value > 2 && Value <= 6.0) { return 2; }
+                else if (Value > 6.0 && Value <= 12) { return 3; }
+                else if (Value > 12) { return 4; }
+                else { return "Nicht berechnet"; }
 
             case 4:
-                if (GD.Model_Quest[67] > 0) { return 4 };
-                if (GD.Model_Quest[65] > 0) { return 3 };
-                if (GD.Model_Quest[31] < 70) { return 1 };
+                if (GD.Model_Quest[67] > 0) { return 4; };
+                if (GD.Model_Quest[65] > 0) { return 3; };
+                if (GD.Model_Quest[31] < 70) { return 1; };
                 return 0;
             default:
             //alert('Nicht berechnet');
@@ -143,6 +212,7 @@
         if (isNaN(x)) { return "Nicht alle Daten sind berechnet" }
         else { return x; }
     },
+    //TEST
     getCriteriaSepsis: function () {
         var CriteriaSepsisArray = [GD.Model_Quest[12], "Апельсин", "Слива"];
         return CriteriaSepsisArray;
@@ -153,7 +223,7 @@
         //if (x < 300){return true}else{return false}
         return true;
     },
-    BtoInt: function (x) { if (x == true || x == "true" || x == 1 || x == "1") { return 1; } else return 0; }
+    BtoInt: function (x) { if (x === true || x === "true" || x === 1 || x === "1") { return 1; } else return 0; }
 
 };
 

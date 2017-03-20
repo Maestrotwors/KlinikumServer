@@ -243,3 +243,11 @@ small {
     color: gray;
     font-weight: lighter;
 }
+
+.delete_notfall {
+    color: gray;
+}
+
+.delete_notfall:hover {
+   color: red !important;
+}

@@ -25,7 +25,18 @@
             @foreach (var tab in ViewData["Statistik_Tabs"] as List<List<string>>)
             {
                 <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==@tab[0]}" id="Statistik_Tab_@tab[0]" style="overflow-y:scroll; height:100%">
-                    @tab[1]
+                    <div>@tab[1]</div>
+                    <div v-for="table in GM().Get_Statistik_Tables(@tab[0])">
+                        <center><b>{{table.Name}}</b></center><br/>
+                        <table class="table table-bordered table-hover table-condensed">
+                            <tr>
+                                <th v-for="column_Head in GM().Get_Statistik_Columns(table.TableId)">{{column_Head.Column_Name}}</th>
+                            </tr>
+                            <tr v-for="row in GM().Get_StatistikTable_Rows(table.Data)"> 
+                                <td v-for="col in GM().Get_Statistik_Columns(table.TableId)"><ColFormule :NotfallId=row.Id :Column=col.Formule></ColFormule></td>
+                            </tr> 
+                        </table>
+                    </div>
                 </div>
             }
 

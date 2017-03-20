@@ -25,6 +25,17 @@
         });
 
         //GD.AnswersModel[4] = "";*/
+        Vue.component('ColFormule', { 
+            props: ['NotfallId','Column'],
+            template: '<span>{{GetData}}</span>',
+            computed: {
+                GetData:{
+                    get: function () {
+                        return this.Column;
+                    }
+                }
+            },
+        });
 
         var IndexPage = {
             template: `@Html.Partial("~/Views/Main/Templates/About.cshtml")`
@@ -120,10 +131,11 @@
                     return GM;
                 }
             },
-            created: function () { 
-                if (this.$route.query.tab != undefined) {
+            created: function () {
+                GM.Get_Statistik_Data();
+                /*if (this.$route.query.tab != undefined) {
                     $("#Statistik_Tab_Panel_" + this.$route.query.tab).click();
-                }
+                }*/
             },
             watch: {
                 '$route': function (to, from) {

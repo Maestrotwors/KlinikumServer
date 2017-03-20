@@ -6,7 +6,7 @@
                 <router-link to="/notfall/new"><i class="fa fa-ambulance fa-plus-square" style="color:red" aria-hidden="true"></i> New Notfall</router-link>
                 <div style="height:calc(100% - 30px);border:2px double;border-radius:5px;margin:2px;">
                     <div v-for="notfall in NotfallsList" >
-                        <div v-bind:class="{ PatientInNotfallsListSel: GM().GetUndefinedBool($route,'id',notfall.Id)}" class ="PatientInNotfallsList" v-on:click="GM().NotfallSelect(notfall.Id,$route)" style="font-size: 11pt;"><strong>{{notfall.PatName}} {{notfall.PatVorname}}</strong><div style="text-align: right;color:red;margin-top:-10px;font-size: 9pt;">{{notfall.ReanimationDateTime}} <div style="text-align: right;font-size: 8pt;"><i style="color:blue">geb.{{notfall.GebDate}}</i></div></div></div>
+                        <div v-bind:class="{ PatientInNotfallsListSel: GM().GetUndefinedBool($route,'id',notfall.Id)}" class ="PatientInNotfallsList" v-on:click="GM().NotfallSelect(notfall.Id,$route)" style="font-size: 11pt;"><strong>{{notfall.PatName}} {{notfall.PatVorname}}</strong><div style="text-align: right;color:red;margin-top:-10px;font-size: 9pt;">{{notfall.ReanimationDateTime}}  <i class="delete_notfall fa fa-close" v-on:click.stop="GM().Notfall_Delete(notfall.Id,notfall.PatientId,notfall.PatName+' '+notfall.PatVorname)"></i><div style="text-align: right;font-size: 8pt;"><i style="color:blue">geb.{{notfall.GebDate}}</i></div></div></div>
                     </div>
                 </div>
             </td>
@@ -58,4 +58,28 @@
             </td>
         </tr>
     </table>
+
+    <!-- Modal Notfall Delete-->
+    <div class="modal fade" id="Modal_Notfall_Delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notfall Löschen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <b style="color:red;">!!! Diese Notfall wird gelöscht !!!</b><br/>
+                    id: {{Notfalls.Deleted.Id}}<br/>Patient:<b>{{Notfalls.Deleted.Name}}</b><br/>PatientId:<b>{{Notfalls.Deleted.PatientId}}</b>
+    <!--Geben Sie Ihre Password und Bestätigen <input type="text" value="">-->
+</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein</button>
+                    <button type="button" class="btn btn-primary" v-on:click.stop="GM().Notfall_Delete_Bestatigung()">Ja, Löschen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
