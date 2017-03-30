@@ -26,8 +26,12 @@ var GD = {
     WartenInfo: false,
     UserName: getCookie("Login"),
     Statistik: {
-        Tables: null,
-        Columns: null
+        Param_Values_Filtered: {},
+        Param_Values: {},
+        Tables: {},
+        Columns: {},
+        Notfalls: {},
+        ShowDescriptionSofa:true,
     },
     Notfalls: {
         Deleted: {

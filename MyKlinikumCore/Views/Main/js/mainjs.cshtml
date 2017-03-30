@@ -27,11 +27,14 @@
         //GD.AnswersModel[4] = "";*/
         Vue.component('ColFormule', { 
             props: ['NotfallId','Column'],
-            template: '<span>{{GetData}}</span>',
+            template: '<span>{{GetData}}</span>', 
             computed: {
                 GetData:{
                     get: function () {
-                        return this.Column;
+                        //console.log(this.Column);
+                        var d = _.findWhere(GD.Statistik.Columns, { "Id": this.Column.Id.toString()});
+                        //console.log(d);
+                        return d["Formule"];
                     }
                 }
             },
