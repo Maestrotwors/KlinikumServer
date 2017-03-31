@@ -51,13 +51,15 @@
                 }
             });
         },
-        Get_Statistik_Param_Value: function (Notfall_Id, param_Id,compileBool) {
+        Get_Statistik_Param_Value: function (Notfall_Id, param_Id,AnswerId,compileBool) {
             //console.log(String(Notfall_Id) + "---" + String(param_Id));
             
             //var data = _.where(GD.Statistik.Param_Values, { "NotfallId": id });  
             var returning_Notfall= _.findWhere(GD.Statistik.Param_Values_Filtered, { "NotfallId": Notfall_Id });
-            
-            var returning_Param = _.where(returning_Notfall.Answers, { "QuestionId": String(param_Id) });
+            var returning_Param = null;
+            if (AnswerId != 0) { returning_Param = _.where(returning_Notfall.Answers, { "QuestionId": String(param_Id), "AnswerId": String(AnswerId) }) } else {
+                returning_Param = _.where(returning_Notfall.Answers, { "QuestionId": String(param_Id) });
+            }
             //console.log(returning_Param);
             var returning_Value="";
             try {

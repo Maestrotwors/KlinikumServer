@@ -33,11 +33,17 @@
                                     <th>Patient Name</th> 
                                     <th>Vorliegen einer Infektion vermutet</th>
                                     <th>SOFA <input type="checkbox" id="checkbox_Sofa_Description"  v-model="Statistik.ShowDescriptionSofa"> <label for="checkbox_Sofa_Description">Show Description</label></th>
+                                    <th>Atemfrequenz</th>
+                                    <th>Systolischer Blutdruck</th>
+                                    <th>Bewusstseinsveränderung (altered mentation)</th>
                                 </tr> 
                                 <tr v-for="notfall in Statistik.Notfalls">
                                     <td>{{notfall.Name}} {{notfall.Vorname}}</td>
-                                    <td>{{GM().Get_Statistik_Param_Value(notfall.Id,"26",true)}}</td>
+                                    <td>{{GM().Get_Statistik_Param_Value(notfall.Id,"26",0,true)}}</td>
                                     <td><b>{{GM().Get_Sofa_Summ(notfall.Id)}}</b><div v-show="Statistik.ShowDescriptionSofa" class="descr_Sofa">{{GM().Get_NotfallParam(notfall.Id).Sofa.Param_Respiratory}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_Coagulation}}/ {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_Liver_Bil}}/ ({{GM().Get_NotfallParam(notfall.Id).Sofa.Param_C_Hyp_67}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_C_Hyp_65}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_C_Hyp_31}})</div><div v-show="Statistik.ShowDescriptionSofa" class="descr_SofaParams">{{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_1}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_2}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_3}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_4}}</div></td>
+                                    <td>{{GM().Get_Statistik_Param_Value(notfall.Id,"6","36",false)}}</td>
+                                    <td>{{GM().Get_Statistik_Param_Value(notfall.Id,"6","31",false)}}</td>
+                                    <td>{{GM().Get_Statistik_Param_Value(notfall.Id,"6","165",false)}}</td>
                                 </tr>
                             </table>
                     
@@ -50,6 +56,10 @@
                                 <tr>
                                     <td>Notfalle mit SOFA mehr als 2</td>
                                     <td>{{GM().Statistik_Get_Nf_mit_Sofa_mehr_2()}}</td>
+                                </tr>
+                                <tr>
+                                    <td>und noch etwas</td>
+                                    <td></td>
                                 </tr>
                             </table>
 
