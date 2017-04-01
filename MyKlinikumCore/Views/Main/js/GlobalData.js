@@ -27,6 +27,7 @@ var GD = {
     UserName: getCookie("Login"),
     Statistik: {
         Param_Values_Filtered: {},
+        Param_Values_Filtered_All: {},
         Param_Values: {},
         Tables: {},
         Columns: {},

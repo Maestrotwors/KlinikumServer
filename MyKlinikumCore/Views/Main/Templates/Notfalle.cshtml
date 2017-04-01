@@ -2,7 +2,8 @@
     <table style=" width:100%; height:calc(100% - 5px)">
         <tr style="height:calc(100% - 5px);width:100%;vertical-align:top">
             <td style="width:300px !important">
-                <input v-model="Notfall_search" type="text" placeholder="Patient suchen mache ich später">
+                <input v-model="Notfall_search" type="text" placeholder="Patient suchen">
+
                 <router-link to="/notfall/new"><i class="fa fa-ambulance fa-plus-square" style="color:red" aria-hidden="true"></i> New Notfall</router-link>
                 <div style="height:calc(100% - 30px);border:2px double;border-radius:5px;margin:2px;">
                     <div v-for="notfall in NotfallsList" >

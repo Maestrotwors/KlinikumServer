@@ -51,11 +51,19 @@
                 }
             });
         },
+        Statistik_Table1_Filter: function (param) {
+            if (param == "1") {
+                GD.Statistik.Param_Values_Filtered = _.filter(GD.Statistik.Param_Values_Filtered_All, function (e) { return e.SofaSumm > 1; });
+            }
+            if (param == "0") {
+                GD.Statistik.Param_Values_Filtered = GD.Statistik.Param_Values_Filtered_All;
+            }
+        },
         Get_Statistik_Param_Value: function (Notfall_Id, param_Id,AnswerId,compileBool) {
             //console.log(String(Notfall_Id) + "---" + String(param_Id));
             
             //var data = _.where(GD.Statistik.Param_Values, { "NotfallId": id });  
-            var returning_Notfall= _.findWhere(GD.Statistik.Param_Values_Filtered, { "NotfallId": Notfall_Id });
+            var returning_Notfall = _.findWhere(GD.Statistik.Param_Values_Filtered, { "NotfallId": Notfall_Id });
             var returning_Param = null;
             if (AnswerId != 0) { returning_Param = _.where(returning_Notfall.Answers, { "QuestionId": String(param_Id), "AnswerId": String(AnswerId) }) } else {
                 returning_Param = _.where(returning_Notfall.Answers, { "QuestionId": String(param_Id) });
@@ -123,13 +131,17 @@
                     GD.Statistik.Columns = JSON.parse(data)["Columns"];
                     GD.Statistik.Notfalls = JSON.parse(data)["Notfalls"];
                     GD.Statistik.Param_Values = JSON.parse(data)["Param_Values"];
-                    //console.log(GD.Statistik.Tables);
+                    //console.log(GD.Statistik.Tables); 
                     GD.Statistik.Param_Values_Filtered = [];
+                    GD.Statistik.Param_Values_Filtered_All = [];
                     GD.Statistik.Notfalls.forEach(function (Notfall) {
                         N_Id = String(Notfall.Id);
                         var X = {
                             Answers: {},
-                            NotfallId : N_Id,
+                            NotfallId: N_Id,
+                            Id: N_Id,
+                            Name: Notfall.Name,
+                            Vorname: Notfall.Vorname,
                             Sofa: {
                                 Param1: null, 
                                 Param2: null, 
@@ -172,7 +184,7 @@
 
                         //console.log("param1=" + self.Get_Statistik_Param_Value(Notfall.Id, "129", false));
                     });
- 
+                    GD.Statistik.Param_Values_Filtered_All = GD.Statistik.Param_Values_Filtered;
                     GD.WartenInfo = false;
 
 
