@@ -1,0 +1,94 @@
+﻿ 
+
+<div style="height:100%">
+    <div class="sk-circle" v-show="WartenInfo" id="WarteInfo" style="z-index:10;border: 1px solid #000;background: #fc0; ">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div><div style="margin-left:50px;color:brown">Bitte warten</div>
+    </div> 
+
+    <div tyle="height:100%" v-show="!WartenInfo">
+        <ul class="nav nav-tabs" role="tablist">
+            @foreach (var tab in ViewData["Statistik_Tabs"] as List<List<string>>)
+            {
+                <li role="presentation" class="my_tab" v-bind:class="{active:this.$route.query.tab==@tab[0]}" id="Statistik_Tab_Panel_@tab[0]" v-on:click="GM().Statistik_Tab_change(@tab[0])"><a href="#Statistik_Tab_@tab[0]" aria-controls="Statistik_Tab_@tab[0]" role="tab" data-toggle="tab">@tab[1]</a></li>
+            }
+        </ul>
+        <div class="tab-content" tyle="height:100%">
+ 
+                <div role="tabpanel" class="tab-pane animated fadeIn" v-bind:class="{active:this.$route.query.tab==1}" id="Statistik_Tab_1" style="overflow-y:scroll; height:100%">
+                 <table v-show="false">
+                     <tr>
+                         <td>1</td><td>2</td>
+                     </tr>
+                 </table> 
+                            <center><b>Table 1</b></center>
+                            <div class="btn-group" data-toggle="buttons" style="margin:5px;">
+                                <label class="btn btn-primary active btn-sm" v-on:click="GM().Statistik_Table1_Filter(0);">
+                                    <input type="radio" name="options" id="Statistik_Radio_1_Table_1" autocomplete="off" checked>Alles zeigen
+                                </label>
+                                <label class="btn btn-primary btn-sm" v-on:click="GM().Statistik_Table1_Filter(1);">
+                                    <input type="radio" name="options" id="Statistik_Radio_2_Table_1" autocomplete="off">Nur SOFA=>2
+                                </label>
+                            </div>
+                            <table class="table " cellspacing="2" border="1" cellpadding="5">
+                                <tr> 
+                                    <th>Patient Name</th> 
+                                    <th>Vorliegen einer Infektion vermutet</th>
+                                    <th>SOFA <input type="checkbox" id="checkbox_Sofa_Description"  v-model="Statistik.ShowDescriptionSofa"> <label for="checkbox_Sofa_Description">Show Description</label></th>
+                                    <th>Atemfrequenz</th>
+                                    <th>Systolischer Blutdruck</th>
+                                    <th>Bewusstseinsveränderung (altered mentation)</th>
+                                </tr>  
+                                <tr v-for="notfall in Statistik.Param_Values_Filtered" class="animated fadeInDown">
+                                    <td>{{notfall.Name}} {{notfall.Vorname}}</td>
+                                    <td>{{GM().Get_Statistik_Param_Value(notfall.Id,"26",0,true)}}</td>
+                                    <td><b><animated_integer v-bind:value="GM().Get_Sofa_Summ(notfall.Id)"></animated_integer></b><div v-show="Statistik.ShowDescriptionSofa" class="descr_Sofa">{{GM().Get_NotfallParam(notfall.Id).Sofa.Param_Respiratory}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_Coagulation}}/ {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_Liver_Bil}}/ ({{GM().Get_NotfallParam(notfall.Id).Sofa.Param_C_Hyp_67}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_C_Hyp_65}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_C_Hyp_31}})</div><div v-show="Statistik.ShowDescriptionSofa" class="descr_SofaParams">{{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_1}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_2}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_3}} / {{GM().Get_NotfallParam(notfall.Id).Sofa.Param_SOFA_4}}</div></td>
+                                    <td><animated_integer v-bind:value="GM().Get_Statistik_Param_Value(notfall.Id,'6','36',false)"></animated_integer></td>
+                                    <td><animated_integer v-bind:value="GM().Get_Statistik_Param_Value(notfall.Id,'6','31',false)"></animated_integer></td>
+                                    <td><animated_integer v-bind:value="GM().Get_Statistik_Param_Value(notfall.Id,'6','165',false)"></animated_integer></td>
+                                </tr> 
+                                </table>
+                    
+                            <center><b>Table 2</b></center>
+                            <table class="table " cellspacing="2" border="1" cellpadding="5">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Value</th> 
+                                </tr>
+                                <tr>
+                                    <td>Notfalle mit SOFA mehr als 2</td>
+                                    <td>{{GM().Statistik_Get_Nf_mit_Sofa_mehr_2()}}</td>
+                                </tr>
+                                <tr>
+                                    <td>und noch etwas</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
+ 
+                </div> 
+        </div>
+    </div>
+
+   <table style="background-color:red; width:100%; height:calc(100% - 5px)">
+       <tr style="height:calc(100% - 5px);vertical-align:top">
+          <td style="background-color:green; width:300px">
+
+          </td>
+          <td>
+
+          </td>
+       </tr>
+   </table>
+
+</div>

@@ -1,0 +1,84 @@
+﻿<div style="height:100%;" > 
+    <table style=" width:100%; height:calc(100% - 5px)">
+        <tr style="height:calc(100% - 5px);width:100%;vertical-align:top">
+            <td style="width:300px !important">
+                <input v-model="Notfall_search" type="text" placeholder="Patient suchen">
+
+                <router-link to="/notfall/new"><i class="fa fa-ambulance fa-plus-square" style="color:red" aria-hidden="true"></i> New Notfall</router-link>
+                <div style="height:calc(100% - 30px);border:2px double;border-radius:5px;margin:2px;">
+                    <div v-for="notfall in NotfallsList" >
+                        <div v-bind:class="{ PatientInNotfallsListSel: GM().GetUndefinedBool($route,'id',notfall.Id)}" class ="PatientInNotfallsList" v-on:click="GM().NotfallSelect(notfall.Id,$route)" style="font-size: 11pt;"><strong>{{notfall.PatName}} {{notfall.PatVorname}}</strong><div style="text-align: right;color:red;margin-top:-10px;font-size: 9pt;">{{notfall.ReanimationDateTime}}  <i class="delete_notfall fa fa-close" v-on:click.stop="GM().Notfall_Delete(notfall.Id,notfall.PatientId,notfall.PatName+' '+notfall.PatVorname)"></i><div style="text-align: right;font-size: 8pt;"><i style="color:blue">geb.{{notfall.GebDate}}</i></div></div></div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div   v-if="!$route.query.id" style="background: url(http://medrabotnik.de/wp-content/uploads/2015/08/cropped-dreamstime_xl_49010041.jpg) no-repeat center top fixed;width:100%;height:100%;background-size: cover;"><center class="animated flash"><b>Wählen Sie bitte Notfall.</b></center></div>
+                <div style="height:100%; border:2px ridge;" v-if="this.$route.query.id"> 
+                        <div style="height:100%">
+                            <div class="sk-circle" v-show="WartenInfo" id="WarteInfo" style="z-index:10;border: 1px solid #000;background: #fc0; ">
+                                <div class="sk-circle1 sk-child"></div>
+                                <div class="sk-circle2 sk-child"></div>
+                                <div class="sk-circle3 sk-child"></div>
+                                <div class="sk-circle4 sk-child"></div>
+                                <div class="sk-circle5 sk-child"></div>
+                                <div class="sk-circle6 sk-child"></div>
+                                <div class="sk-circle7 sk-child"></div>
+                                <div class="sk-circle8 sk-child"></div>
+                                <div class="sk-circle9 sk-child"></div>
+                                <div class="sk-circle10 sk-child"></div>
+                                <div class="sk-circle11 sk-child"></div>
+                                <div class="sk-circle12 sk-child"></div><div style="margin-left:50px;color:brown">Bitte warten</div>
+                            </div>
+                            <div style="font-size: 170%;"><b>{{SelectedNotfall.Name}} {{SelectedNotfall.Vorname}}</b></div>  Geb: {{SelectedNotfall.GebDate}} Reanimation:{{SelectedNotfall.ReanimationDateTime}} Gender: <i v-show="SelectedNotfall.Gender==1" class="fa fa-ambulance fa-venus"></i><i v-show="SelectedNotfall.Gender==0" class="fa fa-ambulance fa-mars"></i> <div>Notfall id: <b>{{ $route.query.id }}</b></div>
+                            <div tyle="height:100%"> 
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" id="Notfall_Tab_Panel_1" v-bind:class="{active:this.$route.query.tab==1}" v-on:click="GM().Notfall_tab_change('1',$route)"><a href="#Notfalle_Tab_1" aria-controls="Notfalle_Tab_1" role="tab" data-toggle="tab">Aus Notfallprotokollen</a></li>
+                                    <li role="presentation" id="Notfall_Tab_Panel_2" v-bind:class="{active:this.$route.query.tab==2}" v-on:click="GM().Notfall_tab_change('2',$route)"><a href="#Notfalle_Tab_2" aria-controls="Notfalle_Tab_2" role="tab" data-toggle="tab">Aus Orbis</a></li>
+                                    <li role="presentation" id="Notfall_Tab_Panel_3" v-bind:class="{active:this.$route.query.tab==3}" v-on:click="GM().Notfall_tab_change('3',$route)"><a href="#Notfalle_Tab_3" aria-controls="Notfalle_Tab_3" role="tab" data-toggle="tab">Aus den Akten</a></li>
+                                    <li role="presentation" id="Notfall_Tab_Panel_4" v-bind:class="{active:this.$route.query.tab==4}" v-on:click="GM().Notfall_tab_change('4',$route)"><a href="#Notfalle_Tab_4" aria-controls="Notfalle_Tab_4" role="tab" data-toggle="tab">Berechnung</a></li>
+                                </ul>
+                                <div class="tab-content" tyle="height:100%">
+                                    <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==1}" id="Notfalle_Tab_1">
+                                        @Html.Partial("~/Views/Main/Templates/NotfallViewDescription1.cshtml")
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==2}" id="Notfalle_Tab_2">
+                                        @Html.Partial("~/Views/Main/Templates/NotfallViewDescription2.cshtml")
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==3}" id="Notfalle_Tab_3">
+                                        @Html.Partial("~/Views/Main/Templates/NotfallViewDescription3.cshtml")
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==4}" id="Notfalle_Tab_4">
+                                        @Html.Partial("~/Views/Main/Templates/NotfallViewBerechnung.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Modal Notfall Delete-->
+    <div class="modal fade" id="Modal_Notfall_Delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notfall Löschen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <b style="color:red;">!!! Diese Notfall wird gelöscht !!!</b><br/>
+                    id: {{Notfalls.Deleted.Id}}<br/>Patient:<b>{{Notfalls.Deleted.Name}}</b><br/>PatientId:<b>{{Notfalls.Deleted.PatientId}}</b>
+    <!--Geben Sie Ihre Password und Bestätigen <input type="text" value="">-->
+</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein</button>
+                    <button type="button" class="btn btn-primary" v-on:click.stop="GM().Notfall_Delete_Bestatigung()">Ja, Löschen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,2 +1,0 @@
-# KlinikumServer
-KlinikumServer
