@@ -244,7 +244,7 @@
                 success: function (data) {
                     //console.log(NotfallId + "---" + tab);
                     router.push({ query: { id: NotfallId, tab: tab } }); 
-                    GD.Selected_Notfall.NotfallId = JSON.parse(data)[0].Id
+                    //GD.Selected_Notfall.NotfallId = JSON.parse(data)[0].Id
                     GD.SelectedNotfall = JSON.parse(data)[0];
                 }
             });
