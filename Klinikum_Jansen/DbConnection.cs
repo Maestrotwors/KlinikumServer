@@ -18,7 +18,7 @@ namespace MyKlinikumCore
             try
             {
                 myConnection.Open();
-                SqlCommand myCommand = new SqlCommand(Query, myConnection);
+                SqlCommand myCommand = new SqlCommand(Query, myConnection); 
                 myCommand.ExecuteNonQuery(); 
                 myConnection.Close();
                 return true;
