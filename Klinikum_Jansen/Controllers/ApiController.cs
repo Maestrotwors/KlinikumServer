@@ -8,15 +8,22 @@ using System.Text;
 
 namespace MyKlinikumCore
 {
+    public class SessionElement
+    {
+        public string UserId;
+        public string UserLogin;
+        public string UserPassword;
+    }
+
     public static class Params {
-        public static Dictionary<string, string> Sess = new Dictionary<string, string>();
-        public static string GetUserIdFromSession(string Val)
+        public static Dictionary<string, SessionElement> Sess = new Dictionary<string, SessionElement>();
+        /*public static string GetUserIdFromSession(string Val)
         {
             return Sess[Val]; 
-        }
-        public static void SessionAdd(string Key, string Val)
+        }*/
+        public static void SessionAdd(string Key, SessionElement Element)
         {
-            try { Sess.Add(Key, Val); } catch { }
+            try { Sess.Add(Key, Element); } catch { }
         }
     }
 
@@ -92,7 +99,8 @@ namespace MyKlinikumCore
         {
             if (Request.Cookies["Session"] != null)
             {
-                string UserId = Params.Sess[Request.Cookies["Session"]];
+                SessionElement Session = Params.Sess[Request.Cookies["Session"]];
+                string UserId = Session.UserId;
                 if (UserId!=null)
                 {
                     DB db = new DB();
@@ -113,7 +121,8 @@ namespace MyKlinikumCore
         {
             if (Request.Cookies["Session"] != null)
             {
-                string UserId = Params.Sess[Request.Cookies["Session"]];
+                SessionElement Session = Params.Sess[Request.Cookies["Session"]];
+                string UserId = Session.UserId;
                 if (UserId != null)
                 {
                     DB db = new DB();
@@ -145,6 +154,47 @@ namespace MyKlinikumCore
         }*/
 
         [HttpPost]
+        public ActionResult passwordChange()
+        {
+            string AltePass = Request.Form["altePass"].ToString();
+            string NeuePass = Request.Form["neuePass"].ToString();
+            string UserId="0";
+
+            string CookieSession = Request.Cookies["Session"];
+            DB db = new DB();
+
+            if (CookieSession != null)
+            {
+                if (Params.Sess.ContainsKey(CookieSession))
+                {
+                    SessionElement Session = Params.Sess[Request.Cookies["Session"]];
+                    UserId = Session.UserId;
+                }
+            }
+
+
+            
+
+            SqlCommand command = new SqlCommand("select * from users where Id=@Id and Password=@Password", db.myConnection);
+            command.Parameters.Add(new SqlParameter("Id", UserId));
+            command.Parameters.Add(new SqlParameter("Password", AltePass));
+            List<Dictionary<string, string>> responce = db.SelectCommandParam(command);
+            int content = responce.Count;
+
+            if (content > 0)
+            { 
+                db.ExecuteQuery("update users SET Password=" + NeuePass + " where Id=" + UserId);
+                Params.Sess.Remove(Request.Cookies["Session"]); 
+            }
+            else
+            {
+                return Content("0");
+            }
+
+            return Content("1");
+        }    
+
+        [HttpPost]
         public ActionResult Login()
         {
             DB db = new DB();
@@ -162,13 +212,18 @@ namespace MyKlinikumCore
             {
                 string UserId = responce[0]["Id"].ToString();
                 string Login = responce[0]["Login"].ToString();
+                string Password = responce[0]["Password"].ToString();
                 string source = Login + "---"+ System.DateTime.Now.ToString();
                 MD5 md5Hash = MD5.Create();
                 string SessionNummer = GetMd5Hash(md5Hash, source); 
                 Response.Cookies.Append("Session", SessionNummer);
                 Response.Cookies.Append("Login", Login);
 
-                Params.SessionAdd(SessionNummer, UserId);
+                SessionElement Element=new SessionElement();
+                Element.UserId = UserId;
+                Element.UserLogin= Login;
+                Element.UserPassword = Password;
+                Params.SessionAdd(SessionNummer, Element);
                 return Content("1");
             }
             else

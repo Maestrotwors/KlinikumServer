@@ -2,7 +2,7 @@
     <table style=" width:100%; height:calc(100% - 5px)">
         <tr style="height:calc(100% - 5px);width:100%;vertical-align:top">
             <td style="width:300px !important">
-                <input v-model="Notfall_search" type="text" placeholder="Patient suchen">
+                <input v-show="false" v-model="Notfall_search" type="text" placeholder="Patient suchen">
 
                 <router-link to="/notfall/new"><i class="fa fa-ambulance fa-plus-square" style="color:red" aria-hidden="true"></i> New Notfall</router-link>
                 <div style="height:calc(100% - 30px);border:2px double;border-radius:5px;margin:2px;">
@@ -36,6 +36,7 @@
                                     <li role="presentation" id="Notfall_Tab_Panel_2" v-bind:class="{active:this.$route.query.tab==2}" v-on:click="GM().Notfall_tab_change('2',$route)"><a href="#Notfalle_Tab_2" aria-controls="Notfalle_Tab_2" role="tab" data-toggle="tab">Aus Orbis</a></li>
                                     <li role="presentation" id="Notfall_Tab_Panel_3" v-bind:class="{active:this.$route.query.tab==3}" v-on:click="GM().Notfall_tab_change('3',$route)"><a href="#Notfalle_Tab_3" aria-controls="Notfalle_Tab_3" role="tab" data-toggle="tab">Aus den Akten</a></li>
                                     <li role="presentation" id="Notfall_Tab_Panel_4" v-bind:class="{active:this.$route.query.tab==4}" v-on:click="GM().Notfall_tab_change('4',$route)"><a href="#Notfalle_Tab_4" aria-controls="Notfalle_Tab_4" role="tab" data-toggle="tab">Berechnung</a></li>
+                                    <li role="presentation" id="Notfall_Tab_Panel_5" v-bind:class="{active:this.$route.query.tab==5}" v-on:click="GM().Notfall_tab_change('5',$route)"><a href="#Notfalle_Tab_5" aria-controls="Notfalle_Tab_5" role="tab" data-toggle="tab">Patient Info <span class="label label-default" style="background-color:cadetblue">Test</span></a></li>
                                 </ul>
                                 <div class="tab-content" tyle="height:100%">
                                     <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==1}" id="Notfalle_Tab_1">
@@ -49,6 +50,9 @@
                                     </div>
                                     <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==4}" id="Notfalle_Tab_4">
                                         @Html.Partial("~/Views/Main/Templates/NotfallViewBerechnung.cshtml")
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" v-bind:class="{active:this.$route.query.tab==5}" id="NotfallViewPatientInfo">
+                                        @Html.Partial("~/Views/Main/Templates/NotfallViewPatientInfo.cshtml")
                                     </div>
                                 </div>
                             </div>

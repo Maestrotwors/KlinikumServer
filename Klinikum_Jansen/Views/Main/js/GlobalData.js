@@ -6,6 +6,7 @@
 }
 
 var GD = {
+    altePass:"", neuePass1:"", neuePass2:"",
     PatientenList: [],
     NotfallsList: [],
     NotfallsDataMap: [],

@@ -25,9 +25,9 @@
         });
 
         //GD.AnswersModel[4] = "";*/
-        Vue.component('ColFormule', { 
+        Vue.component('ColFormule', {
             props: ['NotfallId','Column'],
-            template: '<span>{{GetData}}</span>', 
+            template: '<span>{{GetData}}</span>',
             computed: {
                 GetData:{
                     get: function () {
@@ -43,6 +43,22 @@
         var IndexPage = {
             template: `@Html.Partial("~/Views/Main/Templates/About.cshtml")`
         };
+
+        var SettingsPage = {
+            template: `@Html.Partial("~/Views/Main/Templates/Settings.cshtml")`,
+            data: function () {
+                return GD;
+            },
+            events: {},
+            methods: {
+                GM: function () {
+                    return GM;
+                }
+            },
+            created: function () {
+            }
+        };
+
         var PatientsPage = {
             template: `@Html.Partial("~/Views/Main/Templates/Patienten.cshtml")`,
             data: function () {
@@ -73,7 +89,7 @@
             },
             created() {
                 this.NotfallChanged(this.$route);
-                
+
             },
             watch: {
                 '$route':function(to, from) {
@@ -82,7 +98,7 @@
             }
         };
         /*var NotfallPage = {
- 
+
              data: function () {
                 return GD;
             },
@@ -145,12 +161,12 @@
                     //if (from.query.tab != undefined) { console.log("---"); }
                 }
             }
-        };  
+        };
 
         Vue.component('animated_integer', {
             template: '<span>{{ tweeningValue }}</span>',
             props: {
-                value: { 
+                value: {
                     required: true
                 }
             },
@@ -187,7 +203,7 @@
                     animationFrame = requestAnimationFrame(animate)
                 }
             }
-        }); 
+        });
 
         var routes = [
             { path: '/', component: IndexPage, name: "IndexPage" },
@@ -202,17 +218,19 @@
                             //console.log("--======-");
                             //console.log($router.params.userId);
                         },
-                        created: function () { 
+                        created: function () {
                         }
                     }
                 ]*/
             },
             { path: '/notfall/new', component: NotfallNewPage, name: "NotfallNewPage" },
-            { path: '/statistik', component: StatistikPage, name: "StatistikPage" }
+            { path: '/statistik', component: StatistikPage, name: "StatistikPage" },
+            { path: '/settings', component: SettingsPage, name: "SettingsPage" }
+            
         ];
         var router = new VueRouter({ mode: 'history', routes });
 
- 
+
 
         var app = new Vue({
             router,
@@ -220,7 +238,7 @@
             data: function () {
                 return GD;
             },
-            components: { 
+            components: {
             },
             events: {},
             methods: {

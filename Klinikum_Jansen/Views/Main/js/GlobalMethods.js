@@ -1,4 +1,26 @@
 ﻿var GM = {
+        PasswordSpeichern: function (altePass, neuePass1, neuePass2) {
+            if (neuePass1!=neuePass2){
+                alert("Neues Kennwort ist nicht gleich");
+            } else {
+                if (altePass == "" || neuePass1 == "" || neuePass2 == "") {
+                    alert("Sie haben nicht alles geschrieben.");
+                } else {
+                    alert("----");
+                    $.ajax({
+                        url: '/api/passwordChange',
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        type: 'POST', data: { "altePass": altePass, "neuePass": neuePass1},
+                        success: function (data) {
+                            if (data == "1") { alert("Kennwort wurde geändert"); location.reload(); }
+                            if (data == "0") { alert("Password ist falsch");   }
+                        }
+                    });
+                }
+            }
+        },
         PatientenClick: function (id) {
             //router.go("/patient/" + id);
         },
@@ -274,7 +296,7 @@
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                type: 'POST', data: { "PatName": GD.NewNotfall_PatientName, "PatVorname": GD.NewNotfall_PatientVorname, "PatGebDate": GD.NewNotfall_PatientGeburtsdatum, "ReanimationDateTime": "11.11.2011" },
+                type: 'POST', data: { "PatName": GD.NewNotfall_PatientName, "PatVorname": GD.NewNotfall_PatientVorname, "PatGebDate": GD.NewNotfall_PatientGeburtsdatum, "ReanimationDateTime": GD.NewNotfall_PatientReanimationDate + " " + GD.NewNotfall_PatientReanimationTime},
                 success: function (data) {
                     if (data === "0") { alert("Fehler"); return }
                     router.push({ name: 'NotfallPage', params: { "NotfallId": data } });

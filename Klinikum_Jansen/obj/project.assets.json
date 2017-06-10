@@ -8852,15 +8852,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\RR\\.nuget\\packages\\": {}
+    "C:\\Users\\Roman\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\RR\\Source\\Repos\\KlinikumServer\\Klinikum_Jansen\\Klinikum_Jansen.csproj",
+      "projectUniqueName": "C:\\Servers\\Jansen\\KlinikumServer\\Klinikum_Jansen\\Klinikum_Jansen.csproj",
       "projectName": "Klinikum_Jansen",
-      "projectPath": "C:\\Users\\RR\\Source\\Repos\\KlinikumServer\\Klinikum_Jansen\\Klinikum_Jansen.csproj",
-      "outputPath": "C:\\Users\\RR\\Source\\Repos\\KlinikumServer\\Klinikum_Jansen\\obj\\",
+      "projectPath": "C:\\Servers\\Jansen\\KlinikumServer\\Klinikum_Jansen\\Klinikum_Jansen.csproj",
+      "outputPath": "C:\\Servers\\Jansen\\KlinikumServer\\Klinikum_Jansen\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "net462"
