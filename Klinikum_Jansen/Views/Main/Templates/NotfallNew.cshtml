@@ -30,17 +30,17 @@
         <tr>
             <td>Geschlecht</td>
             <td>
-                <input style="cursor:pointer" type="radio" id="NewNotfall_Gender_M" value="true" v-model="NewNotfall_PatientGender">
-                <label style="cursor:pointer" for="NewNotfall_Gender_M">M<i class="fa fa-ambulance fa-mars"></i></label>
-                <br/>
-                <input style="cursor:pointer" type="radio" id="NewNotfall_Gender_F" value="false" v-model="NewNotfall_PatientGender">
-                <label style="cursor:pointer" for="NewNotfall_Gender_F">F<i class="fa fa-ambulance fa-venus"></i></label>
+                <select v-model="NewNotfall_PatientGender">
+                    <option disabled value="">---</option>
+                    <option value="1">M</option>
+                    <option value="0">F</option> 
+                </select>  
                 <br/>
             </td>
         </tr>
     </table> 
     <div style="text-align: center; ">
         <input type="button" value="Speichern" v-on:click="GM().CreateNotfall()"/>
-        <input type="button" value="Zurück" v-on:click="GM().GoToNotfalls()"/>
+        <router-link to="/notfalls">Go back</router-link><br />
     </div>
 </div> 

@@ -41,8 +41,21 @@ namespace MyKlinikumCore
             dic.Add("PatVorName", Request.Form["PatName"]);
             dic.Add("PatGebDate", Request.Form["PatGebDate"]);
             dic.Add("ReanimationDateTime", Request.Form["ReanimationDateTime"]);
+            dic.Add("Gender", Request.Form["Gender"]);
             return Content(db.ExecuteProcedure("NotfallCreate", dic));
         }
+
+        [HttpPost]
+        public ActionResult get_patient_info()
+        {
+            DB db = new DB();
+            SqlCommand command = new SqlCommand("SELECT n.PatientId,N.Id AS NotfallId, Name,Vorname,p.GebDate, p.Gender,n.ReanimationDateTime FROM Patients p INNER JOIN Notfalls n ON p.Id = n.PatientId where n.Id=@NotfallID", db.myConnection);
+            string NotfallId = Request.Form["NotfallId"].ToString();
+            command.Parameters.Add(new SqlParameter("NotfallID", NotfallId));
+            return Content(JsonConvert.SerializeObject(db.SelectCommandParam(command)));
+        }
+
+        
 
         [HttpPost]
         public ActionResult get_notfall_data()

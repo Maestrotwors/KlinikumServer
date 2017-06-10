@@ -6,8 +6,8 @@
 
                 <router-link to="/notfall/new"><i class="fa fa-ambulance fa-plus-square" style="color:red" aria-hidden="true"></i> New Notfall</router-link>
                 <div style="height:calc(100% - 30px);border:2px double;border-radius:5px;margin:2px;">
-                    <div v-for="notfall in NotfallsList" >
-                        <div v-bind:class="{ PatientInNotfallsListSel: GM().GetUndefinedBool($route,'id',notfall.Id)}" class ="PatientInNotfallsList" v-on:click="GM().NotfallSelect(notfall.Id,$route)" style="font-size: 11pt;"><strong>{{notfall.PatName}} {{notfall.PatVorname}}</strong><div style="text-align: right;color:red;margin-top:-10px;font-size: 9pt;">{{notfall.ReanimationDateTime}}  <i class="delete_notfall fa fa-close" v-on:click.stop="GM().Notfall_Delete(notfall.Id,notfall.PatientId,notfall.PatName+' '+notfall.PatVorname)"></i><div style="text-align: right;font-size: 8pt;"><i style="color:blue">geb.{{notfall.GebDate}}</i></div></div></div>
+                    <div v-for="(notfall, index) in NotfallsList" >
+                        <div v-bind:class="{ PatientInNotfallsListSel: GM().GetUndefinedBool($route,'id',notfall.Id)}" class ="PatientInNotfallsList" v-on:click="GM().NotfallSelect(notfall.Id,$route)" style="font-size: 11pt;">{{index+1}})<strong style="margin-left:5px;">{{notfall.PatName}} {{notfall.PatVorname}}</strong><div style="text-align: right;color:red;margin-top:-10px;font-size: 9pt;">{{notfall.ReanimationDateTime}}  <i class="delete_notfall fa fa-close" v-on:click.stop="GM().Notfall_Delete(notfall.Id,notfall.PatientId,notfall.PatName+' '+notfall.PatVorname)"></i><div style="text-align: right;font-size: 8pt;"><i style="color:blue">geb.{{notfall.GebDate}}</i></div></div></div>
                     </div>
                 </div>
             </td>

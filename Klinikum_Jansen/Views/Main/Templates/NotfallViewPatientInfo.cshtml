@@ -1,28 +1,24 @@
 ﻿<div style="background-color:wheat">
-    <div>
+    <div >
         <center><strong>Patient Info</strong></center><br>
         <table style="margin: auto;">
             <tr><th></th><th align="center"></th></tr>
             <tr>
                 <td>Name</td>
-                <td><input type="text" v-model="NewNotfall_PatientName" /></td>
+                <td><input disabled type="text" v-model="Selected_Notfall.SelectedPatient.Name"   v-bind:onchange="GM().Edit_Patient_SaveParam('PatientName',this.value)" /></td>
             </tr>
             <tr>
                 <td>Vorname</td>
-                <td><input type="text" v-model="NewNotfall_PatientVorname" /></td>
+                <td><input disabled type="text" v-model="Selected_Notfall.SelectedPatient.Vorname"   v-bind:onchange="GM().Edit_Patient_SaveParam('PatientVorname',this.value)" /></td>
             </tr>
             <tr>
                 <td>Geburtsdatum</td>
-                <td><input type="date" v-model="NewNotfall_PatientGeburtsdatum" /></td>
+                <td><input disabled type="text" v-model="Selected_Notfall.SelectedPatient.GebDate"   v-bind:onchange="GM().Edit_Patient_SaveParam('PatientGeburtsdatum',this.value)" /></td>
             </tr>
             <tr>
-                <td>Datum der Reanimation</td>
-                <td><input type="date" v-model="NewNotfall_PatientReanimationDate" /></td>
-            </tr>
-            <tr>
-                <td>Uhrzeit der Reanimation</td>
-                <td><input type="time" v-model="NewNotfall_PatientReanimationTime" /></td>
-            </tr>
+                <td>Datum und Zeit der Reanimation</td>
+                <td><input disabled type="text" v-model="Selected_Notfall.SelectedPatient.ReanimationDateTime"   v-bind:onchange="GM().Edit_Patient_SaveParam('ReanimationDateTime',this.value)" /></td>
+            </tr> 
             <tr>
                 <td>Alter zum Zeitpunkt der Reanimation</td>
                 <td>wird berechnet</td>
@@ -30,17 +26,14 @@
             <tr>
                 <td>Geschlecht</td>
                 <td>
-                    <input style="cursor:pointer" type="radio" id="NewNotfall_Gender_M" value="true" v-model="NewNotfall_PatientGender">
-                    <label style="cursor:pointer" for="NewNotfall_Gender_M">M<i class="fa fa-ambulance fa-mars"></i></label>
-                    <br />
-                    <input style="cursor:pointer" type="radio" id="NewNotfall_Gender_F" value="false" v-model="NewNotfall_PatientGender">
-                    <label style="cursor:pointer" for="NewNotfall_Gender_F">F<i class="fa fa-ambulance fa-venus"></i></label>
+                    <select disabled v-model="Selected_Notfall.SelectedPatient.Gender"   v-bind:onchange="GM().Edit_Patient_SaveParam('Gender',this.value)" >
+                        <option disabled value="">---</option>
+                        <option value="1">M</option>
+                        <option value="0">F</option>
+                    </select>
                     <br />
                 </td>
             </tr>
         </table>
-        <div style="text-align: center; ">
-            <input type="button" value="Speichern" v-on:click="GM().UpdateNotfall__()" />
-        </div>
     </div>
 </div>

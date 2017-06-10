@@ -22,10 +22,15 @@ var GD = {
     NewNotfall_PatientName: "",
     Notfall_Quest: [],
     Model_Quest: [],
-    SelectedNotfall: {},
-    SelectedNotfallId :0,
+    SelectedNotfall: {},//OLD
+    SelectedNotfallId: 0,//OLD
     WartenInfo: false,
     UserName: getCookie("Login"),
+    Selected_Notfall: {
+        SelectedNotfallId: 0,
+        SelectedPatient: { 
+        }
+    },
     Statistik: {
         Param_Values_Filtered: {},
         Param_Values_Filtered_All: {},

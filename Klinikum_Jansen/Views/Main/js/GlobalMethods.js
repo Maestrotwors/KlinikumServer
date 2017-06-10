@@ -73,6 +73,20 @@
                 }
             });
         },
+        Edit_Patient_SaveParam: function (Param, ThisValue) {  
+            if (GD.Selected_Notfall.NotfallId=="0"){return}
+            $.ajax({
+                url: '/api/edit_patient_info',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                type: 'POST', data: { "Edit_PatientName": GD.Edit_PatientName, "Edit_PatientVorname": GD.Edit_PatientVorname, "ThisValue": ThisValue },
+                success: function (data) {
+                    //router.push({ name: 'NotfallPage', params: { "NotfallId": 36 } })
+                    //GD.SelectedNotfall = JSON.parse(data)[0];
+                }
+            });
+        },
         Statistik_Table1_Filter: function (param) {
             if (param == "1") {
                 GD.Statistik.Param_Values_Filtered = _.filter(GD.Statistik.Param_Values_Filtered_All, function (e) { return e.SofaSumm > 1; });
@@ -215,6 +229,7 @@
         },
         NotfallSelect: function (NotfallId, rout) {
             if (NotfallId === undefined) { return }
+            GD.Selected_Notfall.NotfallId = "0";
             var tab = 1;
             try { tab = rout.query.tab; } finally { if (tab === undefined) { tab = 1; } }
             GD.Model_Quest = {};
@@ -228,7 +243,8 @@
                 type: 'POST', data: { "NotfallId": NotfallId },
                 success: function (data) {
                     //console.log(NotfallId + "---" + tab);
-                    router.push({ query: { id: NotfallId, tab: tab } });
+                    router.push({ query: { id: NotfallId, tab: tab } }); 
+                    GD.Selected_Notfall.NotfallId = JSON.parse(data)[0].Id
                     GD.SelectedNotfall = JSON.parse(data)[0];
                 }
             });
@@ -245,6 +261,19 @@
                         //console.log(item.AnswerId);
                         GD.Model_Quest[item.AnswerId] = item.Value;
                     });
+                    GD.WartenInfo = false;
+                }
+            });
+            $.ajax({
+                url: '/api/get_patient_info',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                type: 'POST', data: { "NotfallId": NotfallId },
+                success: function (data) {
+                    arr = JSON.parse(data);
+                    console.log(arr);
+                    GD.Selected_Notfall.SelectedPatient = arr[0];   
                     GD.WartenInfo = false;
                 }
             });
@@ -296,7 +325,7 @@
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                type: 'POST', data: { "PatName": GD.NewNotfall_PatientName, "PatVorname": GD.NewNotfall_PatientVorname, "PatGebDate": GD.NewNotfall_PatientGeburtsdatum, "ReanimationDateTime": GD.NewNotfall_PatientReanimationDate + " " + GD.NewNotfall_PatientReanimationTime},
+                type: 'POST', data: { "PatName": GD.NewNotfall_PatientName, "PatVorname": GD.NewNotfall_PatientVorname, "PatGebDate": GD.NewNotfall_PatientGeburtsdatum, "ReanimationDateTime": GD.NewNotfall_PatientReanimationDate + " " + GD.NewNotfall_PatientReanimationTime, "Gender": GD.NewNotfall_PatientGender},
                 success: function (data) {
                     if (data === "0") { alert("Fehler"); return }
                     router.push({ name: 'NotfallPage', params: { "NotfallId": data } });
