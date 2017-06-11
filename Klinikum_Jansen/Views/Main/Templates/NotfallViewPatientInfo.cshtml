@@ -7,7 +7,7 @@
                 <td>Name</td>
                 <td><input disabled type="text" v-model="Selected_Notfall.SelectedPatient.Name"   v-bind:onchange="GM().Edit_Patient_SaveParam('PatientName',this.value)" /></td>
             </tr>
-            <tr>
+            <tr> 
                 <td>Vorname</td>
                 <td><input disabled type="text" v-model="Selected_Notfall.SelectedPatient.Vorname"   v-bind:onchange="GM().Edit_Patient_SaveParam('PatientVorname',this.value)" /></td>
             </tr>
@@ -18,20 +18,20 @@
             <tr>
                 <td>Datum und Zeit der Reanimation</td>
                 <td><input disabled type="text" v-model="Selected_Notfall.SelectedPatient.ReanimationDateTime"   v-bind:onchange="GM().Edit_Patient_SaveParam('ReanimationDateTime',this.value)" /></td>
-            </tr> 
-            <tr>
+            </tr>  
+            <tr>   
                 <td>Alter zum Zeitpunkt der Reanimation</td>
                 <td>wird berechnet</td>
-            </tr>
-            <tr>
+            </tr> 
+            <tr>    
                 <td>Geschlecht</td>
-                <td>
+                <td> 
                     <select disabled v-model="Selected_Notfall.SelectedPatient.Gender"   v-bind:onchange="GM().Edit_Patient_SaveParam('Gender',this.value)" >
                         <option disabled value="">---</option>
                         <option value="1">M</option>
                         <option value="0">F</option>
-                    </select>
-                    <br />
+                    </select> 
+                    <br/>
                 </td>
             </tr>
         </table>

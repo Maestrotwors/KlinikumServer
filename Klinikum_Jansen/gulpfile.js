@@ -7,7 +7,8 @@ var gulp = require("gulp"),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
     watch = require('gulp-watch'),
-    pagebuilder = require('gulp-pagebuilder')
+    pagebuilder = require('gulp-pagebuilder'),
+    fs = require('fs');
 
 var paths = {
     webroot: "./wwwroot/"
@@ -34,6 +35,20 @@ gulp.task("min:js_Main", function () {
         .pipe(uglify())
         .pipe(gulp.dest("."));
 });
+
+ 
+gulp.task('SaveUpdateTime', function () {
+    var tm = new Date();
+    var resTxt = '';
+
+    resTxt += tm.getDate() + "." + (tm.getMonth() + 1)
+        + "." + tm.getFullYear()+"  "; 
+
+    resTxt += tm.getHours() + ":"
+        + tm.getMinutes() + ":" + tm.getSeconds();
+
+    fs.writeFileSync('UpdateTime.txt', resTxt );
+}); 
 
 gulp.task("min:css_Main", function () {
     return gulp.src([paths.css_Main])
@@ -69,6 +84,7 @@ gulp.task("start", function () {
     gulp.watch(paths.css_Main, ['min:css_Main']);
     gulp.watch(paths.js_Library, ['min:js_Library']);
     gulp.watch(paths.css_Library, ['min:css_Library']);
+    gulp.watch(['./files/**', './Views/**', './Controllers/**'], ['SaveUpdateTime']);
 });
 
 gulp.task("minimize_files_js_and_css", ["min:js_Main", "min:css_Main"]);
