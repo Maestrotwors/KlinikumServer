@@ -35,7 +35,7 @@ namespace MyKlinikumCore
             {
                 routes.MapRoute("login", "login", new { controller = "Auth", action = "Login" });
                 routes.MapRoute("logout", "logout", new { controller = "Auth", action = "Logout" });
-                routes.MapRoute(
+                routes.MapRoute( 
                     name: "Main",
                     template: "{Controller=Main}/{Action=Index}");
                 routes.MapRoute(
