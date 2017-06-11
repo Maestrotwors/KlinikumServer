@@ -9,8 +9,7 @@ using System.Data;
 namespace MyKlinikumCore
 {
     public partial class DB 
-    {
-        public static string ConnectionString="Server=91.247.83.221\\SqlExpress;Database=Klinikum;User id=RomanAdmin;Password=Master;";
+    { 
         public SqlConnection myConnection = new SqlConnection(ConnectionString);
         public bool ExecuteQuery(string Query)
         {
