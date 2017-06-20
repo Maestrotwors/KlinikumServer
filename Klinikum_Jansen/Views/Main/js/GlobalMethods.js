@@ -1,4 +1,5 @@
-﻿var GM = {
+﻿ 
+var GM = {
         PasswordSpeichern: function (altePass, neuePass1, neuePass2) {
             if (neuePass1!=neuePass2){
                 alert("Neues Kennwort ist nicht gleich");
@@ -61,6 +62,7 @@
         },*/
         SaveParam: function (AnswerId, AnswerQuestion, ThisValue) {
             //console.log(AnswerId + "---" + AnswerQuestion + "----" + ThisValue);
+            GD.Notfalls.blocked = true;
             $.ajax({
                 url: '/api/save_param_value',
                 headers: {
@@ -68,8 +70,13 @@
                 },
                 type: 'POST', data: { "NotfallId": GD.SelectedNotfallId, "AnswerId": AnswerId, "ThisValue": ThisValue },
                 success: function (data) {
+                    GD.Notfalls.blocked = false;
                     //router.push({ name: 'NotfallPage', params: { "NotfallId": 36 } })
                     //GD.SelectedNotfall = JSON.parse(data)[0];
+                }, 
+                error: function (xhr, status, errorThrown) {
+                    alert("Fehler! Daten wurden nicht gespeichert. Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
         },
@@ -84,6 +91,10 @@
                 success: function (data) {
                     //router.push({ name: 'NotfallPage', params: { "NotfallId": 36 } })
                     //GD.SelectedNotfall = JSON.parse(data)[0];
+                },
+                error: function (xhr, status, errorThrown) {
+                    alert("Fehler! Date wurden nicht gespeichert. Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
         },
@@ -224,6 +235,10 @@
                     GD.WartenInfo = false;
 
 
+                },
+                error: function (xhr, status, errorThrown) {
+                    alert("Fehler! Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
         },
@@ -235,6 +250,7 @@
             GD.Model_Quest = {};
             GD.SelectedNotfallId = NotfallId;
             GD.WartenInfo = true;
+            GD.Notfalls.blocked = true;
             $.ajax({
                 url: '/api/get_notfall_data',
                 headers: {
@@ -246,6 +262,10 @@
                     router.push({ query: { id: NotfallId, tab: tab } }); 
                     //GD.Selected_Notfall.NotfallId = JSON.parse(data)[0].Id
                     GD.SelectedNotfall = JSON.parse(data)[0];
+                },
+                error: function (xhr, status, errorThrown) {
+                    //alert("Fehler! Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
             $.ajax({
@@ -262,6 +282,11 @@
                         GD.Model_Quest[item.AnswerId] = item.Value;
                     });
                     GD.WartenInfo = false;
+                    GD.Notfalls.blocked = false;
+                },
+                error: function (xhr, status, errorThrown) {
+                    alert("Fehler! Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
             $.ajax({
@@ -275,6 +300,10 @@
                     console.log(arr);
                     GD.Selected_Notfall.SelectedPatient = arr[0];   
                     GD.WartenInfo = false;
+                },
+                error: function (xhr, status, errorThrown) {
+                    //alert("Fehler! Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
 
@@ -311,6 +340,10 @@
                     }
                     //console.log(data);
                     //$('#Modal_Notfall_Delete').modal('hide');
+                },
+                error: function (xhr, status, errorThrown) {
+                    alert("Fehler! Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
             $('#Modal_Notfall_Delete').modal('hide');
@@ -330,6 +363,10 @@
                     if (data === "0") { alert("Fehler"); return }
                     router.push({ name: 'NotfallPage', params: { "NotfallId": data } });
                     GM.GetNotfalls();
+                },
+                error: function (xhr, status, errorThrown) {
+                    alert("Fehler! Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             })
         },
@@ -341,6 +378,10 @@
                 },
                 success: function (data) {
                     GD.NotfallsList = JSON.parse(data);
+                },
+                error: function (xhr, status, errorThrown) {
+                    alert("Fehler! Kein internet Verbindung oder Server antwortet nicht.<br/> Ich mache Reconnect");
+                    location.reload();
                 }
             });
         },

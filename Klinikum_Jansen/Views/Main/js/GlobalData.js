@@ -45,7 +45,8 @@ var GD = {
             Id: null,
             Name: null,
             PatientId: null
-        }
+        },
+        blocked:false
     }
 
 };

@@ -1,10 +1,10 @@
-﻿ <div>
-    <center><b>Password ändern</b></center>
-     <table>
-         <tr>Alte Kennwort<td><input v-model="altePass" type="password"></td><td></td></tr>
-         <tr>Neue Kennwort<td><input v-model="neuePass1" type="password"></td><td></td></tr>
-         <tr>Neue Kennwort noch mal<td><input v-model="neuePass2" type="password"></td><td></td></tr>
-         <tr><td><input type="button" v-on:click="GM().PasswordSpeichern(altePass,neuePass1,neuePass2)" value="Speichern"></td></tr>
+﻿ <div style="height:250px">
+    <center><b>Password ändern</b></center> 
+     <table  style="height:250px">
+         <tr><td>Alte Kennwort</td><td><input v-model="altePass" type="password"> </td></tr>
+         <tr><td>Neue Kennwort</td><td><input v-model="neuePass1" type="password"></td></tr>
+         <tr><td>Neue Kennwort noch mal</td><td><input v-model="neuePass2" type="password"> <input type="button" v-on:click="GM().PasswordSpeichern(altePass,neuePass1,neuePass2)" value="Speichern"></td></tr> 
     </table>
+     
  </div>
  

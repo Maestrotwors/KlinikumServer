@@ -1,7 +1,7 @@
 {
   "version": 2,
   "targets": {
-    ".NETFramework,Version=v4.6.2": {
+    ".NETFramework,Version=v4.6.1": {
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -1404,19 +1404,6 @@
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
         }
       },
-      "System.Collections.NonGeneric/4.3.0": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System",
-          "mscorlib"
-        ],
-        "compile": {
-          "ref/net46/System.Collections.NonGeneric.dll": {}
-        },
-        "runtime": {
-          "lib/net46/System.Collections.NonGeneric.dll": {}
-        }
-      },
       "System.ComponentModel/4.3.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1445,7 +1432,6 @@
       "System.ComponentModel.TypeConverter/4.3.0": {
         "type": "package",
         "dependencies": {
-          "System.Collections.NonGeneric": "4.3.0",
           "System.ComponentModel.Primitives": "4.3.0"
         },
         "frameworkAssemblies": [
@@ -1453,10 +1439,10 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net462/System.ComponentModel.TypeConverter.dll": {}
+          "ref/net45/System.ComponentModel.TypeConverter.dll": {}
         },
         "runtime": {
-          "lib/net462/System.ComponentModel.TypeConverter.dll": {}
+          "lib/net45/System.ComponentModel.TypeConverter.dll": {}
         }
       },
       "System.Console/4.3.0": {
@@ -1550,14 +1536,11 @@
       },
       "System.Diagnostics.Tracing/4.3.0": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
         "compile": {
-          "ref/net462/System.Diagnostics.Tracing.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Diagnostics.Tracing.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Dynamic.Runtime/4.0.11": {
@@ -1596,14 +1579,13 @@
       "System.IO/4.3.0": {
         "type": "package",
         "frameworkAssemblies": [
-          "System",
-          "mscorlib"
+          "System"
         ],
         "compile": {
-          "ref/net462/System.IO.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.IO.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.IO.Compression/4.3.0": {
@@ -1769,14 +1751,11 @@
       },
       "System.Reflection/4.3.0": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
         "compile": {
-          "ref/net462/System.Reflection.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Reflection.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Reflection.Emit/4.0.1": {
@@ -1841,14 +1820,13 @@
         "frameworkAssemblies": [
           "System",
           "System.ComponentModel.Composition",
-          "System.Core",
-          "mscorlib"
+          "System.Core"
         ],
         "compile": {
-          "ref/net462/System.Runtime.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Runtime.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/4.3.0": {
@@ -1863,14 +1841,13 @@
       "System.Runtime.Extensions/4.3.0": {
         "type": "package",
         "frameworkAssemblies": [
-          "System",
-          "mscorlib"
+          "System"
         ],
         "compile": {
-          "ref/net462/System.Runtime.Extensions.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Runtime.Extensions.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Runtime.Handles/4.3.0": {
@@ -1887,19 +1864,15 @@
       },
       "System.Runtime.InteropServices/4.3.0": {
         "type": "package",
-        "dependencies": {
-          "System.Runtime": "4.3.0"
-        },
         "frameworkAssemblies": [
           "System",
-          "System.Core",
-          "mscorlib"
+          "System.Core"
         ],
         "compile": {
-          "ref/net462/System.Runtime.InteropServices.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Runtime.InteropServices.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Runtime.InteropServices.RuntimeInformation/4.3.0": {
@@ -2205,7 +2178,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.6.2/win7-x86": {
+    ".NETFramework,Version=v4.6.1/win7-x86": {
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -3577,19 +3550,6 @@
           "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
         }
       },
-      "System.Collections.NonGeneric/4.3.0": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System",
-          "mscorlib"
-        ],
-        "compile": {
-          "ref/net46/System.Collections.NonGeneric.dll": {}
-        },
-        "runtime": {
-          "lib/net46/System.Collections.NonGeneric.dll": {}
-        }
-      },
       "System.ComponentModel/4.3.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -3618,7 +3578,6 @@
       "System.ComponentModel.TypeConverter/4.3.0": {
         "type": "package",
         "dependencies": {
-          "System.Collections.NonGeneric": "4.3.0",
           "System.ComponentModel.Primitives": "4.3.0"
         },
         "frameworkAssemblies": [
@@ -3626,10 +3585,10 @@
           "mscorlib"
         ],
         "compile": {
-          "ref/net462/System.ComponentModel.TypeConverter.dll": {}
+          "ref/net45/System.ComponentModel.TypeConverter.dll": {}
         },
         "runtime": {
-          "lib/net462/System.ComponentModel.TypeConverter.dll": {}
+          "lib/net45/System.ComponentModel.TypeConverter.dll": {}
         }
       },
       "System.Console/4.3.0": {
@@ -3713,14 +3672,11 @@
       },
       "System.Diagnostics.Tracing/4.3.0": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
         "compile": {
-          "ref/net462/System.Diagnostics.Tracing.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Diagnostics.Tracing.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Dynamic.Runtime/4.0.11": {
@@ -3759,14 +3715,13 @@
       "System.IO/4.3.0": {
         "type": "package",
         "frameworkAssemblies": [
-          "System",
-          "mscorlib"
+          "System"
         ],
         "compile": {
-          "ref/net462/System.IO.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.IO.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.IO.Compression/4.3.0": {
@@ -3916,14 +3871,11 @@
       },
       "System.Reflection/4.3.0": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib"
-        ],
         "compile": {
-          "ref/net462/System.Reflection.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Reflection.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Reflection.Emit/4.0.1": {
@@ -3988,14 +3940,13 @@
         "frameworkAssemblies": [
           "System",
           "System.ComponentModel.Composition",
-          "System.Core",
-          "mscorlib"
+          "System.Core"
         ],
         "compile": {
-          "ref/net462/System.Runtime.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Runtime.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Runtime.CompilerServices.Unsafe/4.3.0": {
@@ -4010,14 +3961,13 @@
       "System.Runtime.Extensions/4.3.0": {
         "type": "package",
         "frameworkAssemblies": [
-          "System",
-          "mscorlib"
+          "System"
         ],
         "compile": {
-          "ref/net462/System.Runtime.Extensions.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Runtime.Extensions.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Runtime.Handles/4.3.0": {
@@ -4034,19 +3984,15 @@
       },
       "System.Runtime.InteropServices/4.3.0": {
         "type": "package",
-        "dependencies": {
-          "System.Runtime": "4.3.0"
-        },
         "frameworkAssemblies": [
           "System",
-          "System.Core",
-          "mscorlib"
+          "System.Core"
         ],
         "compile": {
-          "ref/net462/System.Runtime.InteropServices.dll": {}
+          "ref/net45/_._": {}
         },
         "runtime": {
-          "lib/net462/System.Runtime.InteropServices.dll": {}
+          "lib/net45/_._": {}
         }
       },
       "System.Runtime.InteropServices.RuntimeInformation/4.3.0": {
@@ -5468,8 +5414,6 @@
       "type": "package",
       "path": "newtonsoft.json/9.0.1",
       "files": [
-        "Newtonsoft.Json.9.0.1.nupkg.sha512",
-        "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -5484,6 +5428,8 @@
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.9.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
         "tools/install.ps1"
       ]
     },
@@ -5698,43 +5644,6 @@
         "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.xml",
         "system.collections.immutable.1.3.0.nupkg.sha512",
         "system.collections.immutable.nuspec"
-      ]
-    },
-    "System.Collections.NonGeneric/4.3.0": {
-      "sha512": "prtjIEMhGUnQq6RnPEYLpFt8AtLbp9yq2zxOSrY7KJJZrw25Fi97IzBqY7iqssbM61Ek5b8f3MG/sG1N2sN5KA==",
-      "type": "package",
-      "path": "system.collections.nongeneric/4.3.0",
-      "files": [
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net46/System.Collections.NonGeneric.dll",
-        "lib/netstandard1.3/System.Collections.NonGeneric.dll",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net46/System.Collections.NonGeneric.dll",
-        "ref/netstandard1.3/System.Collections.NonGeneric.dll",
-        "ref/netstandard1.3/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/de/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/es/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/fr/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/it/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/ja/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/ko/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/ru/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/zh-hans/System.Collections.NonGeneric.xml",
-        "ref/netstandard1.3/zh-hant/System.Collections.NonGeneric.xml",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "system.collections.nongeneric.4.3.0.nupkg.sha512",
-        "system.collections.nongeneric.nuspec"
       ]
     },
     "System.ComponentModel/4.3.0": {
@@ -8844,7 +8753,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETFramework,Version=v4.6.2": [
+    ".NETFramework,Version=v4.6.1": [
       "Microsoft.ApplicationInsights.AspNetCore >= 2.0.0",
       "Microsoft.AspNetCore >= 1.1.1",
       "Microsoft.AspNetCore.Mvc >= 1.1.2",
@@ -8863,16 +8772,16 @@
       "outputPath": "C:\\Servers\\Jansen\\KlinikumServer\\Klinikum_Jansen\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
-        "net462"
+        "net461"
       ],
       "frameworks": {
-        "net462": {
+        "net461": {
           "projectReferences": {}
         }
       }
     },
     "frameworks": {
-      "net462": {
+      "net461": {
         "dependencies": {
           "Microsoft.AspNetCore": {
             "target": "Package",

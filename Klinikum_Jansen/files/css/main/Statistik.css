@@ -1,12 +1,10 @@
-﻿.descr_Sofa {
-    color: blue;
+﻿.descr_Sofa { 
     font-size: 9px;
     text-align:right;
     margin-top:-20px;
 }
 
-.descr_SofaParams {
-    color: green;
+.descr_SofaParams { 
     font-size: 9px;
     text-align: right;
 }
